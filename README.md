@@ -7,6 +7,7 @@
 所以很大可能弃坑，*IOS版开发酝酿中* 。
 
 截图：
+
 ![](https://raw.githubusercontent.com/novoland/douban-artist/master/screenshots/1.png)
 
 ![](https://raw.githubusercontent.com/novoland/douban-artist/master/screenshots/3.png)
