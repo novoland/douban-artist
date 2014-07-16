@@ -1,0 +1,58 @@
+<nav-page id="intro-page" left-buttons="leftMenuToggler" hide-back-button="true" title="'豆瓣音乐人'">
+
+    <tabs tabs-type="tabs-icon-left"
+          tabs-style="tabs-primary">
+
+        <tab does-update-nav-router="false"
+             title="热门单曲"
+             icon-on="fa fa-music"
+             icon-off="fa fa-music">
+            <content  has-header="true" has-tabs="true" on-refresh="onRefresh()" ng-controller="ChartSongCtrl">
+                <!-- pull to refresh TODO a directive-->
+                <scroll-refresher>
+                    <span class="default-tip refresher-tip" >下拉刷新</span>
+                    <span class="to-refresh-tip refresher-tip" >松开刷新</span>
+                    <span class="refreshing-tip refresher-tip">Loading...</span>
+                </scroll-refresher>
+                <!--<refresher></refresher>-->
+
+                <!-- list -->
+                <div class="item item-avatar" ng-repeat="song in chartStatus.songs"
+                     push-url="/artist/{{song.artist_id}}">
+                    <span class="rank">{{song.rank}}</span>
+                    <img ng-src="{{song.picture}}">
+                    <h2>{{song.name}}</h2>
+                    <p>{{song.artist}}</p>
+                    <i class="icon ion-ios7-play play"
+                       ng-click="$event.stopPropagation();$emit('player.reset',chartStatus.songs,$index)"></i>
+                </div>
+            </content>
+        </tab>
+
+        <tab does-update-nav-router="false"
+             title="热门音乐人"
+             icon-on="fa fa-user"
+             icon-off="fa fa-user">
+
+            <content  has-header="true" has-tabs="true" on-refresh="onRefresh()" ng-controller="ChartArtistCtrl">
+                <!-- pull to refresh -->
+                <scroll-refresher>
+                    <span class="default-tip refresher-tip" >下拉刷新</span>
+                    <span class="to-refresh-tip refresher-tip" >松开刷新</span>
+                    <span class="refreshing-tip refresher-tip">Loading...</span>
+                </scroll-refresher>
+                <!--<refresher></refresher>-->
+
+                <!-- list -->
+                <artist-list data="chartStatus.artists"></artist-list>
+            </content>
+
+
+        </tab>
+
+
+    </tabs>
+
+
+
+</nav-page>

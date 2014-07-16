@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android" id="socialmessage" version="0.2.3">
+    <name>Social Message</name>
+    <author>Lee Crossley (http://ilee.co.uk/)</author>
+    <description>Cordova Social Message Plugin to utilise native share features. Share text, images and urls to Facebook, Twitter and more.</description>
+    <keywords>cordova, social, message, share, facebook, twitter, image, url</keywords>
+    <engines>
+        <engine name="cordova" version=">=3.0.0" />
+    </engines>
+    <js-module src="www/socialmessage.js" name="SocialMessage">
+        <clobbers target="socialmessage" />
+    </js-module>
+    <platform name="ios">
+        <config-file target="config.xml" parent="/*">
+            <feature name="SocialMessage">
+                <param name="ios-package" value="SocialMessage" />
+            </feature>
+        </config-file>
+        <header-file src="src/ios/SocialMessage.h" />
+        <source-file src="src/ios/SocialMessage.m" />
+    </platform>
+    <platform name="android">
+        <config-file target="config.xml" parent="/*">
+            <feature name="SocialMessage">
+                <param name="android-package" value="uk.co.ilee.socialmessage.SocialMessage" />
+            </feature>
+        </config-file>
+        <config-file target="AndroidManifest.xml" parent="/*">
+            <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+        </config-file>
+        <source-file src="src/android/SocialMessage.java" target-dir="src/uk/co/ilee/socialmessage" />
+    </platform>
+</plugin>

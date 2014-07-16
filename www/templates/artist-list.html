@@ -1,0 +1,12 @@
+<div class="artist-list-wrapper">
+    <div class="item item-avatar chart-artist" ng-repeat="artist in artistList" push-url="/artist/{{artist.id}}">
+    <img src="{{artist.picture}}">
+    <h2>
+        <span ng-bind-html="artist.name"></span>
+        <span ng-if="artist.type == 'dj' || artist.type == 'label'" class="special">{{artist.type=="dj"?"DJ":"厂牌"}}</span>
+    </h2>
+    <p class="ellipsis">{{artist.style}}</p>
+    <p class="follows">{{artist.follower}}人关注</p>
+    <i class="like fa" ng-click="$event.stopPropagation();toggleLike(artist);" ng-class="{'fa-heart-o':artist.added == 'no','fa-heart':artist.added == 'yes'}"></i>
+    </div>
+</div>

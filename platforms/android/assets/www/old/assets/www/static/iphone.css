@@ -1,0 +1,365 @@
+/* This is the base css file
+ * Note:
+ * - When you add radius border, disable it in android.css.
+ * - when you write rules with image url, write them all in a line.
+ */
+
+/* common */
+body,ul,li { padding:0; margin:0; border:0; -webkit-tap-highlight-color:rgba(0,0,0,0); }
+body { font-size:12px; -webkit-user-select:none; -webkit-text-size-adjust:none; font-family:helvetica; overflow:hidden}
+a {text-decoration:none; color:#333}
+li {list-style:none; background:#f5f5f5}
+li.link {cursor:pointer} img {border:0}
+.hl {background:#eee;}
+.back_link {display:block; z-index:3; position:absolute; height:45px; width:45px; background:url(../image/ios/320/back.png) 15px 14px no-repeat; background-size: 17px 16px}
+.back_link:active {background-image:url(../image/ios/320/back_hover.png)}
+.downward_arrow {-webkit-transform: rotate(-90deg);}
+.close_link {display:block; z-index:3; position:absolute; top:0;left:2px; height:45px; width:45px; background:url(../image/ios/320/cancel.png) 15px 14px no-repeat; background-size: 17px 17px}
+.close_link:active {background-image:url(../image/ios/320/cancel_hover.png)}
+.confirm_link {display:block; z-index:3; position:absolute; top:0;right:2px; height:45px; width:45px; background:url(../image/ios/320/submit.png) 15px 14px no-repeat; background-size: 23px 17px}
+.confirm_link:active {background:url(../image/ios/320/submit.png) no-repeat 15px 14px; background-size: 23px 17px;}
+.forward_link {position:absolute; z-index:2; text-align:center; height:28px; line-height:28px; top:9px; width:40px; right:9px; color:#222; font-size:12px; background:#f5f5f5; -webkit-border-radius:2px; }
+.forward_link:active{background:#ddd}
+.left_top_link {position:absolute; z-index:2; left:10px; top:9px; font-size:12px;}
+.nav_button {background-color: #fff; border-radius:2px; height:28px; line-height:28px; top:9px; width:40px;}
+.btn_primary {display: block; background-color: #333; color: white; font-size:18px; width: 80%; height: 44px; line-height: 42px; margin:20px auto; text-align: center;}
+.slide_arrow {width: 5px;}
+#header {margin:0; border:none;border-width:0; width:100%; height:45px; line-height:45px; background-color:#000; padding:0; color:#eee; font-size:16px; text-align:center; }
+#header .title { margin:0 45px; height:45px; text-align:center;overflow:hidden;white-space:nowrap; text-overflow:ellipsis;}
+#footer { overflow:hidden; position:absolute; z-index:1; bottom:0; width:100%; height:50px; background-color:#000; padding:0; }
+#footer_nav { position:absolute; width:320px; height:50px; right:0}
+.footer_nav_back {width:100%; background:#000; z-index:3; position:absolute; height:50px; bottom:0}
+#bottom_menu {width:100%; z-index:99; bottom:0; position:absolute; visibility:hidden}
+#bottom_menu li {width:100%; height: 50px; border-top:1px solid #000; line-height:50px; text-align:center; color:#fff; font-size:14px; background:rgba(0,0,0,0.83)}
+.centralized_text {margin: 0 auto; text-align:center;}
+.bottom_text { position:absolute; padding:8px 0; margin:30px auto 0;text-align:center; font-size:14px; width:100%; height: 36px; bottom:20px}
+.text_gray {color: #777;}
+.text_medium {font-size: 16px;}
+
+.nav_split { position:absolute; background:transparent; top:8px; left:204px; width:18px; height:36px; border-right:1px solid #444; }
+.nav_chart { background:url(../image/ios/320/toplist.png) 4px 0 no-repeat; }
+.nav_search { background:url(../image/ios/320/search.png) 4px 0 no-repeat; }
+.nav_mine { background:url(../image/ios/320/like.png) 4px 0 no-repeat; }
+.nav_play { background:url(../image/ios/320/playing.png) 4px 0 no-repeat; }
+
+.nav_chart_now { background:url(../image/ios/320/toplist_current.png) 4px 0 no-repeat; color:#fff }
+.nav_search_now { background:url(../image/ios/320/search_current.png) 4px 0 no-repeat; color:#fff }
+.nav_mine_now { background:url(../image/ios/320/like_current.png) 4px 0 no-repeat; color:#fff }
+.nav_play_now { background:url(../image/ios/320/playing_current.png) 4px 0 no-repeat; color:#fff }
+
+.nav_chart:active, .nav_chart_now:active { background:url(../image/ios/320/toplist_hover.png) 4px 0 no-repeat }
+.nav_search:active, .nav_search_now:active { background:url(../image/ios/320/search_hover.png) 4px 0 no-repeat }
+.nav_mine:active, .nav_mine_now:active { background:url(../image/ios/320/like_hover.png) 4px 0 no-repeat }
+.nav_play:active, .nav_play_now:active { background:url(../image/ios/320/playing_hover.png) 4px 0 no-repeat }
+
+.nav_chart, .nav_chart_now, .nav_chart_act { font-size:9px; padding-top:34px; color:#afafaf; text-align:center; position:absolute; left: 9px; top: 0; bottom:0; width:65px; color: #fff; background-size:55px 50px}
+.nav_search, .nav_search_now, .nav_search_act { font-size:9px; padding-top:34px;color:#afafaf;  text-align:center; position:absolute; left: 74px; top: 0; bottom:0; width:65px; color: #fff; background-size:55px 50px}
+.nav_mine, .nav_mine_now, .nav_mine_act { font-size:9px; padding-top:34px; color:#afafaf; text-align:center; position:absolute; left: 139px; top: 0; bottom:0; width:65px; color: #fff; background-size:55px 50px}
+.nav_play, .nav_play_now, .nav_play_act { font-size:9px; padding-top:34px; color:#afafaf; text-align:center; position:absolute; left: 241px; top: 0; bottom:0; width:65px; color: #fff; background-size:55px 50px}
+
+#nav_hl { -webkit-box-shadow: 0 0 5px #333; color:#fff; text-align:center;line-height:25px; position:absolute; top:-15px; font-size:10px;left:320px; bottom:0; width:54px; background: #333}
+
+#content { position:absolute; z-index:1; top:0; bottom:50px; left:0; width:100%; overflow:hidden; background:#f5f5f5; }
+.frame { position:absolute; z-index:1; top:0; width:100%; bottom:0; overflow:hidden; }
+
+
+.loading { display:none; position:absolute; left:50%; top:50%; width:26px; height:8px; z-index:99}
+.loading img {margin:0 0 0 -50%}
+.empty {margin:90px 0; width:100%; font-size:14px; color:#777; text-align:center}
+
+.user_avatar {width: 40px;background: url(../image/ios/320/setting_arrow.png) no-repeat 30px 13px; background-color: #fff; border-radius: 4px;}
+.user_avatar img{float: left; border-radius: 4px 0 0 4px; width: 28px; height: 28px;}
+
+/* chart */
+#wrapper { position:absolute; z-index:1; top:83px; bottom:0; left:0; width:100%; overflow:auto; background:#f5f5f5; }
+#scroller { position:absolute; z-index:1; -webkit-tap-highlight-color:rgba(0,0,0,0); width:100%; padding:0; background:#f5f5f5; }
+#chart_wrapper { position:absolute; z-index:1; top:83px; bottom:0; left:0; width:100%; overflow:auto; background:#f5f5f5; }
+#song_wrapper { position:absolute; z-index:1; top:83px; bottom:0; left:0; width:100%; overflow:auto; background:#f5f5f5; }
+
+.sub_nav_wrap {height:38px; text-align:center; background:#dedede}
+.sub_nav_wrap_artist { height:38px; width:100%; text-align:center; background:#dedede}
+
+.sub_nav {height:38px; margin:auto; width:160px;}
+.sub_nav_artist {height:38px; margin:auto; width:320px;}
+.sub_nav_mine {height:38px; margin:auto; width:240px;}
+
+.sub_nav li {background:#dedede; height:38px; line-height:38px; color:#999; width:80px; text-align:center; float:left; display:block; }
+.sub_nav_artist li {background:#dedede; height:38px; line-height:38px; color:#999; width:64px; text-align:center; float:left; display:block; }
+.sub_nav_mine li {background:#dedede; height:38px; line-height:38px; color:#999; width:80px; text-align:center; float:left; display:block; }
+
+.sub_nav li.now {color:#333; background:url(../image/ios/320/current.png) 34px 30px no-repeat; background-size:12px 8px}
+.sub_nav_artist li.now {color:#333; background:url(../image/ios/320/current.png) 26px 30px no-repeat; background-size:12px 8px}
+.sub_nav_mine li.now {color:#333; background:url(../image/ios/320/current.png) 33px 30px no-repeat; background-size:12px 8px}
+
+#artist_list ul { padding:0; margin:0; width:100%; text-align:left; }
+
+#artist_list li.all { position:relative; height:65px; line-height:20px; border-bottom:1px solid #ccc; font-size:14px; background:#f5f5f5}
+#artist_list li.all img.icon { float:left; height:65px; width:65px}
+#artist_list li.all .song_name { padding:14px 60px 4px 14px; font-size:14px; color:#222; height:16px;  overflow:hidden; white-space:nowrap; text-overflow:ellipsis; }
+#artist_list li.all .name { padding:7px 50px 3px 14px; font-size:14px; color:#222; height:16px;  overflow:hidden; white-space:nowrap; text-overflow:ellipsis; }
+#artist_list li.all .style,
+#artist_list li.all .follower,
+#artist_list li.all .artist,
+#artist_list li.all .count { font-size:12px; padding: 0 56px 0 14px; overflow:hidden; white-space:nowrap; text-overflow:ellipsis; height:18px; color:#777}
+
+#artist_list li.all .like_btn {position:absolute; top:8px; right:0; height:46px; width:46px; }
+#artist_list li.all .like_btn .add {background:url(../image/ios/320/like_s.png) 16px 18px no-repeat; background-size:15px 14px; height:100%; width:100%;}
+#artist_list li.all .like_btn .added {background:url(../image/ios/320/liked_s.png) 16px 18px no-repeat; background-size:15px 14px; height:100%; width:100%;}
+
+#general .like_btn { position:absolute; top:18px; right:15px; height:40px; width: 40px; line-height:26px; background:#fff; -webkit-border-radius:4px; }
+#general .like_btn:active {background: #dedede;}
+#general .like_btn .add { background:url(../image/ios/320/like.png) -4px -3px no-repeat; padding:0 5px 0 25px; background-size:46px 43px; height:50px; width:50px;}
+#general .like_btn .add:active { background:url(../image/ios/320/liked_s.png) 12px 6px no-repeat;}
+#general .like_btn .added { background:url(../image/ios/320/liked_s.png) 12px 6px no-repeat; padding:0 5px 0 25px; background-size:15px 14px; height:50px; width:50px;}
+#general .action_text {position: relative; top: 17px; left: -15px; font-size:10px; white-space: nowrap;}
+
+#artist_list li.chart_song .add { position:absolute; top:17px; right: 14px; height:33px; width:33px; background:url(../image/ios/320/play.png) no-repeat; background-size:33px 32px}
+#artist_list li.chart_song .add:active { position:absolute; top:17px; right: 14px; height:33px; width:33px; background:url(../image/ios/320/play_hover.png) no-repeat; background-size:33px 32px}
+
+#general .share_artist {position:absolute; top: 65px; right:15px; height:26px; line-height:26px; background:#fff; -webkit-border-radius:4px; width: 40px; height:40px; }
+#general .share_artist:active {background: #dedede;}
+#general .share_artist .share {background:url(../image/ios/320/share.png) 10px 4px no-repeat; padding:0 5px 0 25px; background-size:22px 16px; height:20px;}
+
+#artist_list li.all .rank {background: rgba(0,0,0,0.5); position:absolute; height:65px; line-height:65px; font-size:40px; text-align:center; width:65px; color:rgba(255,255,255,0.7)}
+#artist_list li.now {background: #ededed}
+#artist_list li.all .special {background:#b4d3cb; padding:1px 3px; font-size:9px; color:#fff}
+
+/* artist */
+#general { background:#212121; line-height:16px; font-size:14px;  height:125px; left:0; width:100%; overflow:hidden; }
+#general img.icon { float:left; height:90px; width:90px; margin:15px;}
+#general .name { padding:18px 60px 14px 0px; font-size:18px; color:#ccc; height:20px; line-height:20px; overflow:hidden; white-space:nowrap; text-overflow:ellipsis; }
+#general .style, #general .follower { font-size:12px; padding: 0 50px 0 0px; overflow:hidden; white-space:nowrap; text-overflow:ellipsis; height:17px; line-height:17px; color:#666}
+
+#site_tab {position:absolute; height:27px;top:45px; right:10px; width: 160px;overflow:hidden;z-index:3}
+#site_tab li{height:25px; width:50px; display:block; float:left; line-height:27px; font-size:12px; text-align:center; color:#999; background:rgba(0,0,0,0.61);}
+#site_tab .tab_dj {border-left:1px solid rgba(255,255,255,0.3); border-right:1px solid rgba(255,255,255,0.3); }
+#site_tab .site_tab_now {color:#fff}
+
+#style_tab {position:absolute; height:27px;bottom:10px; right:10px; width: 110px;overflow:hidden;z-index:3}
+#style_tab li {height:25px; width:50px; display:block; float:left; line-height:25px; text-align:center; color:#999; background:rgba(0,0,0,0.61);}
+#style_tab .tab_big, #style_tab .sort_by_new {border-left:1px solid rgba(255,255,255,0.3); }
+#style_tab .style_tab_now {color:#fff}
+
+#style_tab .img_big {width:50px; height:25px; background:url(../image/ios/pic_detail_2.png) 18px 6px no-repeat; background-size:14px 14px}
+#style_tab .img_thumb {width:50px; height:25px; background:url(../image/ios/pic_list_2.png) 18px 6px no-repeat; background-size:14px 14px}
+#style_tab .img_big_now {width:50px; height:25px; background:url(../image/ios/pic_detail_1.png) 18px 6px no-repeat; background-size:14px 14px}
+#style_tab .img_thumb_now {width:50px; height:25px; background:url(../image/ios/pic_list_1.png) 18px 6px no-repeat; background-size:14px 14px}
+
+.artist_wrapper { position:absolute; z-index:1; top:45px; bottom:0; left:0; width:100%; overflow:auto; background:#f5f5f5; }
+#scroller_main { position:absolute; z-index:1; width:100%; padding:0; background:#f5f5f5; }
+
+.small_frame { width:100%; overflow:hidden }
+
+#scroller_artist ul { padding:0; margin:0; width:100%; text-align:left; }
+
+/* play list */
+#play_list li {position:relative;border-bottom:1px solid #ddd;height:45px; line-height:45px; font-size:16px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; padding:0 16px 0 16px; color:#333}
+#play_list .forward { float:right; height:12px; width:8px; background:url(../image/ios/320/forward.png) no-repeat; background-size:8px 12px; margin:17px 0 0}
+
+/* songs */
+#wrapper_songs { position:absolute; z-index:1; top:45px; bottom:0; left:0; width:100%; overflow:auto; background:#fff; }
+#scroller_songs { position:absolute; z-index:1; -webkit-tap-highlight-color:rgba(0,0,0,0); width:100%; padding:0; background:#f5f5f5; }
+#song_list li.all {position:relative; -webkit-box-sizing:border-box; padding:18px 0 0 14px; line-height:16px; font-size:14px; border-bottom:1px solid #ddd; height:65px; color:#777}
+#song_list li .song_title {color:#333; font-size: 14px; margin-right:55px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;}
+#song_list li .add { position:absolute; top:17px; right: 14px; height:33px; width:33px; background:url(../image/ios/320/play.png) no-repeat; background-size:33px 33px}
+div.audio_length {font-size:10px; color:#aaa; line-height:14px; }
+#song_list li.now {background: #ededed}
+
+#player { z-index:2; background:rgba(0,0,0,0.9); position:absolute; height:55px; overflow:hidden; width:100%; top:0px;}
+#song_icon {border: 2px solid #dedede; width:39px; height:39px; background-size:39px 39px; left: 8px; top:6px; position:absolute}
+#next_btn { width:32px; height:16px; background:url(../image/ios/320/player.png) no-repeat -32px 0; background-size:110px 30px; position:absolute; top:19px; right:74px;}
+#next_btn:active { background:url(../image/ios/320/player.png) no-repeat -32px -16px; background-size:110px 30px;}
+.pause_btn { width:32px; height:16px; background:url(../image/ios/320/player.png) no-repeat -96px 0; background-size:110px 30px; position:absolute; top:19px; right:124px;}
+.pause_btn:active { background:url(../image/ios/320/player.png) no-repeat -96px -16px; background-size:110px 30px;  }
+.play_btn { width:32px; height:16px; background:url(../image/ios/320/player.png) no-repeat -66px 0; background-size:110px 30px; position:absolute; top:19px; right:124px;}
+.play_btn:active { background:url(../image/ios/320/player.png) no-repeat -66px -16px; background-size:110px 30px; }
+.share_btn {width:32px; height:16px; background:url(../image/ios/320/player.png) no-repeat 0 0; background-size:110px 30px; position:absolute; top:19px; right:12px;}
+.share_btn:active {background:url(../image/ios/320/player.png) no-repeat 0 -16px; background-size:110px 30px; }
+#song_total { background:rgba(255,255,255,0.1); overflow:hidden; position:absolute; height:2px; top:53px; left:0; right:0;}
+#song_progress {position:absolute; height:100%; width:0; background:#dedede}
+#song_title {height:20px; line-height:20px; font-size:12px; position:absolute; top:5px; color:#dedede; left:60px; right:160px; overflow:hidden; white-space:nowrap; }
+#song_time { height:20px; line-height:20px; font-size:10px; position:absolute; top:27px; color:#777; left:60px; text-align:right}
+#player_current {position:absolute; top:47px; right:42px; background:url(../image/ios/320/player_current.png) no-repeat; background-size: 12px 8px;width:12px; height:8px;}
+#no_song_tip {position:absolute; width:100%; top:0; bottom:0; text-align:center; display:none; line-height:55px; color:#eee}
+
+/* genrelist */
+
+#genrelist { padding:0; margin:0; width:100%; text-align:left;background: #f5f5f5 }
+#genrelist li.all {position:relative; border-bottom:1px solid #ddd; height:45px; line-height:45px; font-size:16px; padding-left:15px;color:#333; }
+#genrelist .forward { position:absolute; height:12px; width:8px; background:url(../image/ios/320/forward.png) no-repeat; background-size:8px 12px; top:17px; right:17px;}
+#logout_li {background:#ddd; padding-top:13px; color:#333; line-height:20px; height:32px; width:100%; text-align:center}
+#more_artists {background:#f5f5f5; color:#333; line-height:60px; height:60px; width:100%; text-align:center}
+#wrapper_genre { position:absolute; z-index:1; top:45px; bottom:0; left:0; width:100%; overflow:auto; background:#fff; }
+.dual_tab { width:71px; display:block; background:#000; height:25px; font-size:12px; position:absolute; right:10px; top:10px; color:#000 }
+.dual_tab .sort_new {background: #555; line-height:25px; width: 35px; position:absolute; height: 25px; -webkit-border-radius:2px 0 0 2px; }
+.dual_tab .sort_hot {background: #555; line-height:25px; width: 35px; position:absolute; height: 25px; -webkit-border-radius:0 2px 2px 0; left:36px}
+.dual_tab .now {background:#ddd}
+
+/* artist board */
+#content .board_frame {z-index:3; background:#f5f5f5}
+#message_list img{position:absolute; left:8px; top:0; }
+#message_list li.all {position:relative;border-bottom:1px solid #ddd;min-height:55px; line-height:1.6; font-size:14px; padding:3px 8px 3px 66px;color:#777}
+#message_list li.all .author{color:#333}
+#msg_form {height: 100px; position:relative; border-bottom: 1px solid #ddd; width:100%; background: url(../image/ios/320/input.png) 15px 15px no-repeat; background-size: 283px 75px;}
+#msg_form .gray {color:#aaa}
+#msg_area { width:275px; height:55px; -webkit-box-sizing:border-box; border:none; -webkit-border-radius:0; background-image:-webkit-gradient(linear, 0% 0%, 0% 100%, from(hsla(0,0%,100%,0)), to(hsla(0,0%,100%,0)));background-image:-webkit-linear-gradient(hsla(0,0%,100%,0), hsla(0,0%,100%,0)); margin:17px; padding: 2px 60px 2px 2px; font-size: 12px; color: #333;}
+#msg_area:focus{outline:0; outline:none; border:none}
+.board_submit {display:none; -webkit-border-radius:2px; color:#fff; font-size:12px; width:40px; line-height:26px; position:absolute; background:#222; text-align:center; top:33px; left:243px; height:26px}
+
+/* artist events */
+#event_list li.all {position:relative; border-bottom:1px solid #ddd; height:65px; font-size:14px;}
+#event_list .forward { position:absolute; height:10px; width:10px; background:url(../image/ios/320/link.png) no-repeat; background-size:10px 10px; right:5px; top:11px}
+#event_list li .time {position:absolute; height: 45px; width:45px; left:9px; top:9px; background:#212121; color:#f5f5f5}
+#event_list li .day {position:absolute; font-size: 23px; top: 4px; width:100%; text-align:center;}
+#event_list li .month {position:absolute; top: 27px; display:block; width:100%; text-align:center; font-size:10px;}
+#event_list li .icon {position:absolute; left: 54px; width:45px; height: 45px; top:9px}
+#event_list li .title {font-size:14px; color:#333; padding: 9px 20px 0 109px; height: 20px; text-overflow:ellipsis; white-space:nowrap; overflow:hidden}
+#event_list li .abstract {padding: 3px 20px 0 109px; height: 20px; text-overflow:ellipsis; font-size:12px; white-space:nowrap; overflow:hidden;color:#777}
+
+/* photos */
+#album_list li {position:relative; border-bottom:1px solid #ddd; height:45px; line-height:45px; font-size:16px; color:#212121}
+#album_list .forward { position:absolute; height:12px; width:8px; background:url(../image/ios/320/forward.png) no-repeat; z-index:1; background-size:8px 12px; top:17px; right:17px}
+#album_list .cover { height:45px; width:45px;}
+#album_list .title { position:absolute; height:30px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; left:57px; top:1px; right:22px; z-index:1 }
+
+.photo_desc{ position:absolute; height:69px; z-index:1; width:100%; bottom:0; font-size:12px; background:#212121; padding: 14px; -webkit-box-sizing: border-box; text-align:left}
+.photo_desc .author {color:#555; text-align:center; font-size:10px; margin-top:1px; }
+.desc {font-size:16px; width:100%; text-align:center; color: #f5f5f5;  height:22px; overflow:hidden; white-space:nowrap; text-overflow:ellipsis}
+
+/* need js-generated width */
+#wrapper_photos {position:absolute; width:100%; z-index:1; top:45px; bottom:69px; overflow:hidden; float:left; background:#212121; }
+#scroller_photos {position:absolute; z-index:1; top:0; bottom:0; float:left; width:0; padding:0; background:#212121}
+#photo_list {display:block; float:left; width:100%; height:100%; padding:0; margin:0;}
+
+/* need js-generated width */
+#photo_list li {position:relative;display:block; float:left; height:100%; background:#212121;}
+
+/* need js-generated width and height */
+#photo_list .inphoto { text-align:center; display:table-cell; vertical-align:middle;}
+#photo_list img {max-height:95%; max-width:95%}
+
+/* photos thumb */
+#wrapper_photos_thumb { position:absolute; z-index:1; top:45px; bottom:0; left:0; width:100%; overflow:auto; background:#212121; }
+#scroller_photos_thumb { position:absolute; overflow:hidden; z-index:1; -webkit-tap-highlight-color:rgba(0,0,0,0); width:100%; padding:0; background:#212121; }
+#photo_list_thumb { display:block; float:left; width:101%}
+#photo_list_thumb li { display:block; float:left; width:107px; height:107px; background:#333}
+#photo_list_thumb li img {width:106px; height:106px; border-right:1px solid #eee; border-bottom:1px solid #eee}
+
+/* search */
+.browse_frame { position:absolute; z-index:1; top:45px; width:100%; bottom:0; overflow:hidden; }
+.list_cate { position:absolute; width:100%; height:25px; position:relative; border-bottom:1px solid #ddd; padding:0 9px; line-height:25px; background:#dedede; color: #333;}
+#wrapper_search {position:absolute; z-index:1; top:45px; bottom:0; left:0; width:100%; overflow:hidden; float:left; background:#fff; }
+#scroller_search {position:absolute; z-index:1; top:0; width:100%; padding:0; background:#fff}
+#wrapper_genrelist {position:absolute; z-index:1; top:45px; bottom:0; left:0; width:100%; overflow:hidden; float:left; background:#fff; }
+#tag_tab li {width:33%}
+.search_input { position:relative; height:50px; width:100%; background:#212121;}
+.search_input .text { -webkit-box-sizing:border-box; -webkit-border-radius:12px; 
+    line-height:23px; padding: 0 8px; font-size: 14px; color: #333; 
+    background-image:-webkit-gradient(linear, 0% 0%, 0% 100%, from(hsla(0,0%,100%,0)), to(hsla(0,0%,100%,0)));
+    background-image:-webkit-linear-gradient(hsla(0,0%,100%,0), hsla(0,0%,100%,0));
+    height: 25px; position:absolute; top:12px; left:8px; right:8px;
+}
+.search_input .gray {color:#ccc}
+.search_btn {z-index:2; border:0; position:absolute; top:7px; right:7px; height:35px; width:35px; background:url(../image/ios/320/search_s.png) 7px 10px no-repeat; background-size: 17px 16px }
+.cancel_btn {z-index:2; position:absolute; width:47px; height:25px; line-height:25px; text-align:center; color:#333; background:#f5f5f5; -webkit-border-radius:3px; cursor:pointer; right:7px; display:none; padding:0; top:12px;}
+.search_tags {display:none; position:absolute; z-index:2; top:95px; bottom:0; background:#dfdfdf; width:100% }
+.search_tags .desc {padding: 20px 15px; font-size:16px; color:#444; margin-bottom:12px; }
+#tag_list {padding:0 15px; float:left}
+#tag_list .tag1, #tag_list .tag2, #tag_list .tag3, #tag_list .tag4 {background:transparent; color:#333; line-height:12px; height:12px; padding:7px; font-size:11px; display:block; float:left}
+#tag_list .tag2 {font-size:12px}
+#tag_list .tag3 {font-size:13px}
+#tag_list .tag4 {font-size:14px}
+
+#wrapper_tag { position:absolute; z-index:1; top:45px; bottom:0; left:0; width:100%; overflow:auto; background:#fff; }
+.empty_result_text {margin-top: 80px;}
+
+/* update */
+#update_list li {position:relative; border-bottom:1px solid #ddd; color: #aaa; }
+#update_list li.all img.icon {position:absolute; width:40px; height:40px; right:17px; top:11px;}
+#update_list li.all .icon_play {position:absolute; height:33px; width:33px; top:14px; right:17px; background:url(../image/ios/320/play.png) no-repeat; background-size:33px 32px;}
+#update_list li.all .action {padding: 11px 20px 0 51px; color:#333; font-size:10px;}
+#update_list li.all .title {padding: 14px 70px 0 18px; color:#333; font-size:14px; line-height:19px; height:19px; text-overflow:ellipsis; white-space:nowrap; overflow:hidden}
+#update_list li.all .ext {position:absolute; right:63px; top:18px; background: url(../image/ios/320/link.png) no-repeat; background-size:10px 10px; height:10px; width:10px; display:inline-block;}
+#update_list li.all .abstract {padding: 8px 79px 0 18px; color:#777; font-size:12px; line-height:19px; }
+#update_list li.all .time {padding: 4px 23px 14px 18px; color:#ccc; font-size:10px; height:10px; text-overflow:ellipsis; white-space:nowrap; overflow:hidden}
+#update_list li.all .artist_name {color:#333}
+#update_list .forward { float:right; height:12px; width:8px; background:url(../image/ios/320/forward.png) no-repeat; background-size:8px 12px; margin:25px 20px 0 0}
+#pull_down {background:#f5f5f5; font-size:10px; color:#777; line-height:30px; height:30px; width:100%; text-align:center}
+
+#wrapper_my_art { position:absolute; z-index:1; top:45px; bottom:0; left:0; width:100%; overflow:auto; background:#fff; }
+#scroller_my_art { position:absolute; z-index:1; -webkit-tap-highlight-color:rgba(0,0,0,0); width:100%; padding:0; background:#fff; }
+
+.mine_frame .login_promote_wrapper { position:absolute; top: 130px !important;}
+
+/* login & register */
+#content .login_frame {background: #f5f5f5; bottom:0;}
+.form_wrap { position:absolute; z-index:1; top:45px; bottom:0; left:0; width:100%; overflow:auto; background:#f5f5f5;}
+#form_main {top:0; bottom:0; width: 280px; padding-top:28px; margin: 0 auto;}
+#form_main #err_info { display:none; height:34px; overflow:hidden; font-size: 14px; color:#333; text-align:left; padding-left:10px; line-height: 40px;}
+#form_main #err_info:before {content: '* '}
+#form_main #username,
+#form_main #password,
+#form_main #email,
+#form_main #nick,
+#form_main #re_password,
+#form_main #cap_solution { -webkit-box-sizing: border-box; -webkit-border-radius:0; margin:7px 0; line-height:28px; padding-left: 80px; padding-right:0; font-size: 14px; color: #777; background-image:-webkit-gradient(linear, 0% 0%, 0% 100%, from(hsla(0,0%,100%,0)), to(hsla(0,0%,100%,0)));background-image:-webkit-linear-gradient(hsla(0,0%,100%,0), hsla(0,0%,100%,0)); width: 100%; height: 38px; border:1px solid #dfdfdf }
+#form_main #cap_solution {width: 47%; overflow:hidden}
+#cap_img {width: 146px; height:38px; position:absolute; top:7px; left:134px}
+.input_group {position:relative; overflow:hidden}
+label.input_label {position:absolute; left:19px; font-size:14px; top:17px; color:#666}
+#form_main #submit { -webkit-box-sizing: border-box; padding:8px 0; font-size:18px; text-align:center; width:100%; height: 44px; line-height: 28px; background:#333; color:#fff; border:none; margin:22px 0 0 0; -webkit-tap-highlight-color:rgba(255,255,255,0.2); }
+#form_main .agreement {color:#777; margin-top:9px}
+#form_main .agreement #agree {margin-right:6px}
+#form_main #reg { -webkit-box-sizing: border-box; padding:8px 0; margin:30px auto 0;text-align:center; font-size:14px; width:100%; height: 36px; color:#777; bottom:20px}
+#form_main #reg a{color:#333;}
+
+/* settings */
+#wrapper_settings { position:absolute; z-index:1; top:45px; bottom:0; left:0; width:100%; overflow:auto; background:#f5f5f5;}
+#wrapper_settings li {padding: 10px;} 
+.st {height: 30px; font-size: 14px;}
+.st .txt_wrapper {position:relative; top: 7px;}
+.st_title {color: #555; font-size: 13px; margin-bottom: -12px; margin-top: 10px; margin-left: -3px;}
+.st_item {border: 1px solid #b9b9b9; margin: 0 6px 0 6px; background-color: #fff; font-size: 14px; color: #000;}
+.st_item.non-top-border {border-top: none;}
+.st_item a {width:100%; height:100%; display:block;}
+.st_item .st_action_text {color:#8d8d8d; float:right; font-size: 11px; margin-top: 2px; position: relative; right: -10px; }
+.st_item .st_action_text.logout {right: 4px;}
+.st_item .st_forward_icon { float:right; width: 26px; height: 18px; background: url(../image/ios/320/forward.png) 14px 3px no-repeat;}
+.push_setting .st_tick_icon { float:right; width: 26px; height: 18px; background: url(../image/ios/320/submit.png) 0 0 no-repeat;}
+.push_setting.checked .st_tick_icon { float:right; width: 26px; height: 18px; background: url(../image/ios/320/submit_active.png) 0 0 no-repeat;}
+.bottom_space {height: 20px;}
+.settings_login {width: 97%;}
+
+/* makeShareText */
+#wrapper_share {margin: 10px;}
+#share_text {border:none; background:#f5f5f5; width: 160px; height: 100px;}
+.share_song_icon {float: right; width: 100px; height:100px;}
+.txt_countdown {height: 20px; margin-top: 10px;}
+#share_txt_left {font-size: 14px; color: #777;}
+.share_vendors {background: #f5f5f5; height: 30px; margin-top: 10px;}
+
+/* apps */
+#wrapper_apps {margin-left: 7px;}
+.app_list .app_item {width: 75px; display: inline-block; vertical-align: top; text-align: center; margin-bottom: 20px; overflow: hidden;}
+.app_list .app_item s {width: 50px; height: 50px; margin: 10px auto; display: block; overflow: hidden; background: url(../image/ios/640/app_icons.jpg) no-repeat; border-radius: 10px; background-size: 600px 50px;}
+.app_item .app-title {height: 44px; color: #111; font-size: 14px; text-decoration: none;}
+.app_list .app_item .icon-read { background-position: 0 0;}
+.app_list .app_item .icon-update { background-position: -150px 0;}
+.app_list .app_item .icon-fm { background-position: -250px 0;}
+.app_list .app_item .icon-fm-ipad { background-position: -300px 0;}
+.app_list .app_item .icon-movie {background-position: -350px 0;}
+.app_list .app_item .icon-artists {background-position: -50px 0;}
+.app_list .app_item .icon-cart {background-position: -200px 0;}
+.app_list .app_item .icon-location {background-position: -100px 0;}
+.app_list .app_item .icon-read-notes {background-position: -400px 0;}
+.app_list .app_item .icon-online {background-position: -450px 0;}
+.app_list .app_item .icon-group {background-position: -500px 0;}
+.app_list .app_item .search_app {width: 50px; height: 50px; background: url(../image/ios/640/search.png) no-repeat -28px -6px; background-size: 96px 86px;}
+
+/* about */
+.about_frame .app_icon {background: url(../image/ios/640/appicon.png) no-repeat; background-size: 72px 72px; width: 72px; height: 72px; border-radius: 10px; margin: 20px auto;}
+.about_frame .app_icon_text {background: url(../image/ios/640/logo_text.png) 0 2px no-repeat; background-size: 118px 24px; width: 120px; height: 32px; border-radius: 10px; margin: 20px auto;}
+.about_frame #add_feedback {display: block; background-color: #adaeb0; color: white; font-size:18px; width: 80%; height: 40px; line-height: 42px; margin:20px auto; text-align: center;}
+
+/* feedback */
+#feedback_content { border: none; position: absolute; top: 45px; height: 120px; width: 100%; padding: 10px; font-size: 14px; background: #f5f5f5; overflow: auto;}

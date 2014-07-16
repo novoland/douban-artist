@@ -1,0 +1,15 @@
+<div class="modal">
+    <header class="bar bar-header bar-positive">
+        <span class="button button-icon fa  fa-chevron-left" pop-modal></span>
+        <h1 class="title" ng-bind-html="playlist.name"></h1>
+    </header>
+    <content has-header="true">
+        <div class="item" ng-repeat="song in songs" 
+            ng-click="$event.stopPropagation();$emit('player.reset',songs,$index)">
+            <h2 ng-bind-html="song.name"></h2>
+            <p ng-bind-html="song.length"></p>
+            <i class="icon ion-ios7-play play"
+               ng-click="$event.stopPropagation();$emit('player.reset',songs,$index)"></i>
+        </div>
+    </content>
+</div>

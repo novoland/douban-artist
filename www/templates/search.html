@@ -1,0 +1,28 @@
+<nav-page hide-nav-bar="true" left-buttons="leftMenuToggler" hide-back-button="true" title="'分类浏览'" >
+    <div class="bar bar-header bar-positive item-input-inset">
+        <span ng-click="$emit('toggleLeftMenu')" class="button no-animation button-icon fa fa-bars"></span>
+        <label class="item-input-wrapper">
+            <i class="icon ion-ios7-search placeholder-icon"></i>
+            <input type="search" placeholder="Search" ng-model="searchStatus.q" name="keyword">
+        </label>
+        <span class="button button-clear button-icon fa  fa-search" ng-click="search()"></span>
+    </div>
+
+    <content has-header="true">
+        <div class="list" id="genre-list">
+            <div class="item-divider">流派</div>
+            <a class="item" ng-repeat="genre in searchStatus.genres"
+                 push-url="/category/genre">
+                 <h2 ng-bind-html="genre.name"></h2>
+            </a>
+            <div class="item-divider">类别</div>
+            <a class="item" ng-repeat="type in searchStatus.types"
+                 push-url="/category/type">
+                 <h2 ng-bind-html="type.name"></h2>
+            </a>
+            <div class="item-divider">标签</div>
+            <span class="button button-outline btn-tag" push-url="/category/tag"
+                ng-repeat="tag in searchStatus.tags" ng-bind-html="tag.name"></span>
+        </div>
+    </content>  
+</nav-page>

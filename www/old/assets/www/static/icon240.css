@@ -1,0 +1,59 @@
+.back_link {display:block; z-index:3; position:absolute; height:45px; width:45px; background:url(../image/ios/240/back.png) 15px 14px no-repeat; background-size: 17px 16px}
+.back_link:active {background-image:url(../image/ios/240/back_hover.png)}
+.close_link {display:block; z-index:3; position:absolute; top:0;left:2px; height:45px; width:45px; background:url(../image/ios/240/cancel.png) 15px 14px no-repeat; background-size: 17px 17px}
+.close_link:active {background-image:url(../image/ios/240/cancel_hover.png)}
+.confirm_link {display:block; z-index:3; position:absolute; top:0;right:2px; height:45px; width:45px; background:url(../image/ios/240/submit.png) 15px 14px no-repeat; background-size: 23px 17px}
+.confirm_link:active {background:url(../image/ios/240/submit.png) no-repeat 15px 14px; background-size: 23px 17px;}
+.nav_chart { background:url(../image/ios/240/toplist.png) 4px 0 no-repeat; }
+.nav_search { background:url(../image/ios/240/search.png) 4px 0 no-repeat; }
+.nav_mine { background:url(../image/ios/240/like.png) 4px 0 no-repeat; }
+.nav_play { background:url(../image/ios/240/playing.png) 4px 0 no-repeat; }
+.nav_chart_now { background:url(../image/ios/240/toplist_current.png) 4px 0 no-repeat; color:#fff }
+.nav_search_now { background:url(../image/ios/240/search_current.png) 4px 0 no-repeat; color:#fff }
+.nav_mine_now { background:url(../image/ios/240/like_current.png) 4px 0 no-repeat; color:#fff }
+.nav_play_now { background:url(../image/ios/240/playing_current.png) 4px 0 no-repeat; color:#fff }
+.nav_chart:active, .nav_chart_now:active { background:url(../image/ios/240/toplist_hover.png) 4px 0 no-repeat }
+.nav_search:active, .nav_search_now:active { background:url(../image/ios/240/search_hover.png) 4px 0 no-repeat }
+.nav_mine:active, .nav_mine_now:active { background:url(../image/ios/240/like_hover.png) 4px 0 no-repeat }
+.nav_play:active, .nav_play_now:active { background:url(../image/ios/240/playing_hover.png) 4px 0 no-repeat }
+.user_avatar {width: 40px;background: url(../image/ios/240/setting_arrow.png) no-repeat 30px 13px; background-color: #fff; border-radius: 4px;}
+.sub_nav li.now {color:#333; background:url(../image/ios/240/current.png) 34px 30px no-repeat; background-size:12px 8px}
+.sub_nav_artist li.now {color:#333; background:url(../image/ios/240/current.png) 26px 30px no-repeat; background-size:12px 8px}
+.sub_nav_mine li.now {color:#333; background:url(../image/ios/240/current.png) 33px 30px no-repeat; background-size:12px 8px}
+#artist_list li.all .like_btn .add {background:url(../image/ios/240/like_s.png) 16px 18px no-repeat; background-size:15px 14px; height:100%; width:100%;}
+#artist_list li.all .like_btn .added {background:url(../image/ios/240/liked_s.png) 16px 18px no-repeat; background-size:15px 14px; height:100%; width:100%;}
+#general .like_btn .add { background:url(../image/ios/240/like.png) -4px -3px no-repeat; padding:0 5px 0 25px; background-size:46px 43px; height:50px; width:50px;}
+#general .like_btn .add:active { background:url(../image/ios/240/liked_s.png) 12px 6px no-repeat;}
+#general .like_btn .added { background:url(../image/ios/240/liked_s.png) 12px 6px no-repeat; padding:0 5px 0 25px; background-size:15px 14px; height:50px; width:50px;}
+#artist_list li.chart_song .add { position:absolute; top:17px; right: 14px; height:33px; width:33px; background:url(../image/ios/240/play.png) no-repeat; background-size:33px 32px}
+#artist_list li.chart_song .add:active { position:absolute; top:17px; right: 14px; height:33px; width:33px; background:url(../image/ios/240/play_hover.png) no-repeat; background-size:33px 32px}
+#general .share_artist .share {background:url(../image/ios/240/share.png) 10px 4px no-repeat; padding:0 5px 0 25px; background-size:22px 16px; height:20px;}
+#style_tab .img_big {width:50px; height:25px; background:url(../image/ios/pic_detail_2.png) 18px 6px no-repeat; background-size:14px 14px}
+#style_tab .img_thumb {width:50px; height:25px; background:url(../image/ios/pic_list_2.png) 18px 6px no-repeat; background-size:14px 14px}
+#style_tab .img_big_now {width:50px; height:25px; background:url(../image/ios/pic_detail_1.png) 18px 6px no-repeat; background-size:14px 14px}
+#style_tab .img_thumb_now {width:50px; height:25px; background:url(../image/ios/pic_list_1.png) 18px 6px no-repeat; background-size:14px 14px}
+#play_list .forward { float:right; height:12px; width:8px; background:url(../image/ios/240/forward.png) no-repeat; background-size:8px 12px; margin:17px 0 0}
+#song_list li .add { position:absolute; top:17px; right: 14px; height:33px; width:33px; background:url(../image/ios/240/play.png) no-repeat; background-size:33px 33px}
+#next_btn { width:32px; height:16px; background:url(../image/ios/240/player.png) no-repeat -32px 0; background-size:110px 30px; position:absolute; top:19px; right:74px;}
+#next_btn:active { background:url(../image/ios/240/player.png) no-repeat -32px -16px; background-size:110px 30px;}
+.pause_btn { width:32px; height:16px; background:url(../image/ios/240/player.png) no-repeat -96px 0; background-size:110px 30px; position:absolute; top:19px; right:124px;}
+.pause_btn:active { background:url(../image/ios/240/player.png) no-repeat -96px -16px; background-size:110px 30px;  }
+.play_btn { width:32px; height:16px; background:url(../image/ios/240/player.png) no-repeat -66px 0; background-size:110px 30px; position:absolute; top:19px; right:124px;}
+.play_btn:active { background:url(../image/ios/240/player.png) no-repeat -66px -16px; background-size:110px 30px; }
+.share_btn {width:32px; height:16px; background:url(../image/ios/240/player.png) no-repeat 0 0; background-size:110px 30px; position:absolute; top:19px; right:12px;}
+.share_btn:active {background:url(../image/ios/240/player.png) no-repeat 0 -16px; background-size:110px 30px; }
+#player_current {position:absolute; top:47px; right:42px; background:url(../image/ios/240/player_current.png) no-repeat; background-size: 12px 8px;width:12px; height:8px;}
+#genrelist .forward { position:absolute; height:12px; width:8px; background:url(../image/ios/240/forward.png) no-repeat; background-size:8px 12px; top:17px; right:17px;}
+#msg_form {height: 100px; position:relative; border-bottom: 1px solid #ddd; width:100%; background: url(../image/ios/240/input.png) 15px 15px no-repeat; background-size: 283px 75px;}
+#event_list .forward { position:absolute; height:10px; width:10px; background:url(../image/ios/240/link.png) no-repeat; background-size:10px 10px; right:5px; top:11px}
+#album_list .forward { position:absolute; height:12px; width:8px; background:url(../image/ios/240/forward.png) no-repeat; z-index:1; background-size:8px 12px; top:17px; right:17px}
+.search_btn {z-index:2; border:0; position:absolute; top:7px; right:7px; height:35px; width:35px; background:url(../image/ios/240/search_s.png) 7px 10px no-repeat; background-size: 17px 16px }
+#update_list li.all .icon_play {position:absolute; height:33px; width:33px; top:14px; right:17px; background:url(../image/ios/240/play.png) no-repeat; background-size:33px 32px;}
+#update_list li.all .ext {position:absolute; right:63px; top:18px; background: url(../image/ios/240/link.png) no-repeat; background-size:10px 10px; height:10px; width:10px; display:inline-block;}
+#update_list .forward { float:right; height:12px; width:8px; background:url(../image/ios/240/forward.png) no-repeat; background-size:8px 12px; margin:25px 20px 0 0}
+.st_item .st_forward_icon { float:right; width: 26px; height: 18px; background: url(../image/ios/240/forward.png) 14px 3px no-repeat;}
+.push_setting .st_tick_icon { float:right; width: 26px; height: 18px; background: url(../image/ios/240/submit.png) 0 0 no-repeat;}
+.push_setting.checked .st_tick_icon { float:right; width: 26px; height: 18px; background: url(../image/ios/240/submit_active.png) 0 0 no-repeat;}
+.app_list .app_item .search_app {width: 50px; height: 50px; background: url(../image/ios/640/search.png) no-repeat -28px -6px; background-size: 96px 86px;}
+.about_frame .app_icon {background: url(../image/ios/640/appicon.png) no-repeat; background-size: 72px 72px; width: 72px; height: 72px; border-radius: 10px; margin: 20px auto;}
+.about_frame .app_icon_text {background: url(../image/ios/640/logo_text.png) 0 2px no-repeat; background-size: 118px 24px; width: 120px; height: 32px; border-radius: 10px; margin: 20px auto;}

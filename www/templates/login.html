@@ -1,0 +1,36 @@
+<div class="modal">
+    <header class="bar bar-header bar-positive">
+        <span class="button button-icon fa  fa-times" pop-modal></span>
+        <h1 class="title">登陆</h1>
+    </header>
+    <content has-header="true">
+        <form name="loginForm">
+            <div class="list list-inset">
+                <label class="item item-input">
+                    <input type="email" name="email" ng-model="user.email" placeholder="邮箱" required>
+                </label>
+                <div class="error" ng-show="loginForm.email.$dirty && loginForm.email.$invalid">
+                    <small class="error" ng-show="loginForm.email.$error.required">
+                        邮箱不能为空
+                    </small>
+                    <small class="error" ng-show="loginForm.email.$error.email">
+                        邮箱格式不正确
+                    </small>
+                </div>
+
+                <label class="item item-input">
+                    <input type="password" name="password" ng-model="user.password" placeholder="密码" required>
+                </label>
+                <div class="error" ng-show="loginForm.password.$dirty && loginForm.password.$invalid">
+                    <small class="error" ng-show="loginForm.password.$error.required">
+                        密码不能为空
+                    </small>
+                </div>
+            </div>
+            <div class="padding">
+                <button ng-click="submit()" ng-disabled="loginForm.$invalid" type="submit" class="button button-block button-positive">确定</button>
+                <button class="button button-block button-balanced">立即注册</button>
+            </div>
+        </form>
+    </content>
+</div>

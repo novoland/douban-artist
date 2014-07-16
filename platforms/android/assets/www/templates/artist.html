@@ -1,0 +1,77 @@
+<div class="modal" id="artist-modal">
+    <header class="bar bar-header bar-positive">
+        <span class="button button-icon fa  fa-chevron-left" pop-modal></span>
+        <h1 class="title" ng-bind-html="artist.baseInfo.name"></h1>
+    </header>
+
+    <!-- -->
+    <content  has-header="true">
+        <div id="general">
+            <img class="artist" src="{{artist.baseInfo.picture}}" alt=""/>
+            <div class="like-btn" ng-click="$emit('toggleLike',artist.baseInfo)">
+                <i class="fa" ng-class="{'fa-heart-o':artist.baseInfo.added == 'no','fa-heart':artist.baseInfo.added == 'yes'}"></i>
+                喜欢
+            </div>
+            <div class="share-artist" share-artist="artist.baseInfo">
+                <i class="fa fa-share-square-o"></i>
+                分享
+            </div>
+            <p class="name" ng-bind-html="artist.baseInfo.name"></p>
+            <p class="style" ng-if="artist.baseInfo.style.split(':')[1]" ng-bind-html="artist.baseInfo.style.split(':')[1]"></p>
+            <p class="member" ng-if="artist.baseInfo.member.split(':')[1]" ng-bind-html="artist.baseInfo.member.split(':')[1]"></p>
+            <p class="follower">{{artist.baseInfo.follower}}人关注</p>
+        </div>
+        <div class="simple-tab" tab-wrapper default-active-tab='playlist' tab-head-animate="active" tab-pane-animate="active">
+            <div class="tabs simple-tab-heads">
+                <a class="tab-item" tab-head tab-name="playlist"><i class="fa fa-music"></i>曲库</a>
+                <a class="tab-item" tab-head tab-name="events"><i class="fa  fa-calendar-o"></i>活动</a>
+                <a class="tab-item" tab-head tab-name="albums"><i class="fa fa-picture-o"></i>相册</a>
+                <a class="tab-item" tab-head tab-name="updates"><i class="fa fa-bell-o"></i>动态</a>
+                <a class="tab-item" tab-head tab-name="messages"><i class="fa fa-comments-o"></i>留言</a>
+            </div>
+            <div class="simple-tab-contents">
+                <div tab-pane tab-name="playlist">
+                    <div class="empty" ng-if="artist[tabName].length == 0" ng-bind-html="artist.baseInfo.name + '还没有添加任何播放列表'"></div>
+                    <playlist-list data="artist[tabName]"></playlist-list>
+                </div>
+
+                <div tab-pane tab-name="events">
+                    <div class="empty" ng-if="artist[tabName].length == 0" ng-bind-html="artist.baseInfo.name+'还没有任何活动哦'">
+                    </div>
+                    <event-list data="artist[tabName]"></event-list>
+                </div>
+
+                <div tab-pane tab-name="albums" id="album-tab-content">
+                    <div class="empty" ng-if="artist[tabName].length == 0" ng-bind-html="artist.baseInfo.name+'还没有创建任何相册'">
+                    </div>
+                    <div class="album-item" ng-repeat="album in artist[tabName]" ng-click="">
+                        <img ng-src="{{album.cover?album.cover:'img/empty-album.png'}}"/>
+                        <h2 class="title" ng-bind-html="album.title"></h2>
+                    </div>
+                </div>
+
+                <div tab-pane tab-name="updates">
+                    <div class="empty" ng-if="artist[tabName].length == 0" ng-bind-html="'最近'+artist.baseInfo.name+'还没有什么新鲜事儿发生'">
+                    </div>
+                    <update-list data="artist[tabName]" show-type="true"></update-list>
+                </div>
+
+                <div tab-pane tab-name="messages">
+                    <ul id="message-list">
+                        <div class="" ng-repeat="msg in artist[tabName]" ng-click="">
+                            <img class="msg-avatar" src="{{msg.icon}}"/>
+                            <h2 class="author" ng-bind-html="msg.author"></h2>
+                            <p>{{msg.content}}</p>
+                        </div>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </content>
+
+    <button ng-if="currentTab == 'messages'"
+            ng-click="toPostComment()"
+            style="position:fixed;margin:0;" class="button button-full bar bar-footer">
+        我来说两句
+    </button>
+</div>

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html ng-app="starter">
+  <head>
+    <meta charset="utf-8">
+    <title>Ionic Seed</title>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+      <!--debug-->
+    <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+    <META HTTP-EQUIV="PRAGMA" CONTENT="NO-CACHE">
+
+      <!-- ionic css -->
+    <link href="vendor/font-awesome/css/font-awesome.css" rel="stylesheet">
+    <link href="vendor/ionic/css/ionic.css" rel="stylesheet">
+    <!--友盟分享-->
+    <link rel="stylesheet" type="text/css" href="vendor/umeng/css/social.umeng.css" />
+      <!-- your app's css -->
+    <link href="css/app.css" rel="stylesheet">
+
+  </head>
+
+  <body  ng-controller="AppCtrl">
+      <side-menus left-menu-width='200'>
+          <pane side-menu-content nav-router animation="false">
+              <!-- The nav bar that will be updated as we navigate -->
+              <nav-bar class="nav-title-slide-ios7" type="bar-positive"></nav-bar>
+              <!-- where the content of each page will be rendered -->
+              <ng-view></ng-view>
+          </pane>
+
+          <!-- menu -->
+          <side-menu side="left" ng-controller="MenuCtrl">
+              <!-- avatar -->
+              <img ng-src="{{User.getCurrentUser()?User.getCurrentUser().large_avatar:'img/empty-album.png'}}" id="profile-image"/>
+              <div id="log-action" ng-if="User.getCurrentUser() != null">
+                  <p id="user-name">{{User.getCurrentUser().name}}</p>
+                  <a class="button button-balanced" ng-click="logout()">登出</a>
+              </div>
+              <div id="log-action" ng-if="User.getCurrentUser() == null">
+                  <a class="button button-balanced" push-url="/login" modal-animation="my-slide-in-up">登陆</a>
+              </div>
+              <ul id="left-menu">
+                  <li ng-click="selectMenuItem($index)" ng-class="{active:curMenuIndex==$index}" class="item item-icon-left" ng-repeat="item in menuItems">
+                      <i class="fa {{item.icon}}"></i>
+                      {{item.name}}
+                  </li>
+              </ul>
+          </side-menu>
+      </side-menus>
+
+      <player></player>
+      <http-loading></http-loading>
+      <!--<app-spinner></app-spinner>-->
+      <toast></toast>
+  </body>
+
+
+
+
+  <!-- templates -->
+  <script type="text/ng-template" id="templates/chart-song-iscroll.html">
+      <nav-page id="intro-page" hide-back-button="true" title="'热门歌曲'">
+          <div class="scroll-wrapper has-header" scrollable>
+              <ul class="scroller list">
+                  <li class="item item-avatar" ng-repeat="song in songs" href="#">
+                      <span class="rank">{{song.rank}}</span>
+                      <img style="width:40px;height:40px;" src="{{song.picture}}">
+                      <h2>{{song.name}}</h2>
+                      <p>{{song.artist}}</p>
+                  </li>
+                  <!--songs-->
+              </ul>
+          </div>
+      </nav-page>
+  </script>
+
+  <!-- ionic/angularjs scripts -->
+  <script src="vendor/angular/angular.js"></script>
+  <script src="vendor/angular/angular-animate.js"></script>
+  <script src="vendor/angular/angular-route.js"></script>
+  <script src="vendor/angular/angular-touch.js"></script>
+  <script src="vendor/angular/angular-sanitize.js"></script>
+  <script src="vendor/ionic/js/ionic.js"></script>
+  <script src="vendor/ionic/js/ionic-angular.js"></script>
+
+  <script src="vendor/iscroll5/iscroll.js"></script>
+  <script src="vendor/jquery/jquery-2.0.1.min.js"></script>
+
+  <!--友盟分享-->
+  <script type="text/javascript" src="vendor/umeng/js/html2canvas.js"></script>
+  <script type="text/javascript" src="vendor/umeng/js/social.umeng.js"></script>
+
+  <!-- cordova script -->
+  <script src="cordova.js"></script>
+
+  <!-- your app's script -->
+  <script src="js/ionic-extension.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/services.js"></script>
+  <script src="js/controllers.js"></script>
+  <script src="js/directives.js"></script>
+  <script type="text/javascript">
+      var app = {
+          // Application Constructor
+          initialize: function() {
+              this.bindEvents();
+          },
+          // Bind Event Listeners
+          //
+          // Bind any events that are required on startup. Common events are:
+          // 'load', 'deviceready', 'offline', and 'online'.
+          bindEvents: function() {
+              document.addEventListener('deviceready', this.onDeviceReady, false);
+          },
+          // deviceready Event Handler
+          //
+          // The scope of 'this' is the event. In order to call the 'receivedEvent'
+          // function, we must explicity call 'app.receivedEvent(...);'
+          onDeviceReady: function() {
+              app.receivedEvent('deviceready');
+          },
+          // Update DOM on a Received Event
+          receivedEvent: function(id) {
+              var parentElement = document.getElementById(id);
+              var listeningElement = parentElement.querySelector('.listening');
+              var receivedElement = parentElement.querySelector('.received');
+
+              listeningElement.setAttribute('style', 'display:none;');
+              receivedElement.setAttribute('style', 'display:block;');
+          }
+      };
+      app.initialize();
+  </script>
+
+</html>

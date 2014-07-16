@@ -1,0 +1,6 @@
+<ul class="playlist-list">
+    <a class="item" ng-repeat="playlist in playlistList"
+       push-url="/playlist/{{playlist.id}}">
+        <p ng-bind-html="playlist.title"></p>
+    </a>
+</ul>

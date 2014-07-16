@@ -1,0 +1,9 @@
+<nav-page left-buttons="leftMenuToggler" right-buttons="mineBtn" hide-back-button="true" title="'我喜欢的音乐人'">
+    <content has-header='true'>
+        <div class="empty" ng-if="myArtist.artists.length == 0" ng-bind-html="还没有任何更新"></div>
+        <artist-list data="myArtist.artists" ></artist-list>
+        <div class="item" ng-if="myArtist.pageNo != myArtist.totalPage && myArtist.artists.length" ng-click="more()">
+            <p style="text-align: center;padding: 0;">加载更多</p>
+        </div>
+    </content>
+</nav-page>

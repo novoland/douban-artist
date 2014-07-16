@@ -1,0 +1,13 @@
+<div class="modal">
+    <header class="bar bar-header bar-positive">
+        <span class="button button-icon fa  fa-chevron-left" pop-modal></span>
+        <h1 class="title" ng-bind-html="by=='tag'?'#'+category.name+'#':category.name"></h1>
+        <sort-switch sortby="category.sortby"></sort-switch>
+    </header>
+    <content has-header="true">
+    	<artist-list data="category.artists"></artist-list>
+    	<div class="item" ng-if="category.pageNo != category.totalPage && category.artists.length" ng-click="more()">
+    		<p style="text-align: center;padding: 0;">加载更多</p>
+    	</div>
+    </content>
+</div>

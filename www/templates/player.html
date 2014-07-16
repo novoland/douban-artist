@@ -1,0 +1,19 @@
+<div id="player-wrapper">
+    <i id="player-toggle" ng-hide="!playerStatus.song" ng-click="togglePlayer()" class="fa  fa-chevron-up"
+       ng-class="{'playing-toggle':playerStatus.song && playerStatus.playing,expand:playerStatus.playerVisible}"></i>
+    <div id="player" class="bar bar-footer bar-positive" ng-show="playerStatus.song">
+        <!--<div id="song-progress-bg" style="width:{{progressPercentage()}}"></div>-->
+        <audio></audio>
+        <div id="song-icon"
+             push-url="/artist/{{playerStatus.song.artist_id}}"
+             style="background-image: url({{playerStatus.song.picture}}); background-position: initial initial; background-repeat: initial initial;"></div>
+        <div id="song-title" ng-class="{marquee:isTitleTooLong()}" ng-bind-html="playerStatus.song.name"></div>
+        <div id="song-time">{{timeLeft()}}</div>
+        <div id="song-total">
+            <div id="song-progress" style="width:{{progressPercentage()}}"></div>
+        </div>
+        <i id="pause-btn" class="fa {{playerStatus.playing?'fa-pause':'fa-play'}}"  ng-click="togglePause()"></i>
+        <i id="next-btn" class="fa fa-fast-forward" ng-click="playNext()"></i>
+        <i id="share-btn" class="fa fa-share-square-o" share-song="playerStatus.song"></i>
+    </div>
+</div>

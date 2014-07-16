@@ -1,0 +1,34 @@
+<nav-page left-buttons="leftMenuToggler" right-buttons="myArtistBtn" hide-back-button="true" title="'我喜欢的音乐人'">
+    <div ng-if="User.getCurrentUser() == null" style="position: absolute" class='has-header'>
+        <div class="centralized_text text_medium text_gray">
+            查看喜欢的音乐人及最新动态请
+        </div>
+        <a push-url="/login" modal-animation="my-slide-in-up" class="btn_primary">登录</a>
+        <div id="reg">
+            <a href="/register">还没有帐号？立即注册</a>
+        </div>
+    </div>
+    <!-- -->
+    <div ng-if="User.getCurrentUser() != null" class="simple-tab" tab-wrapper default-active-tab='song' tab-head-animate="active" tab-pane-animate="active">
+        <div class="tabs simple-tab-heads"id="mine-tab-heads">
+            <a class="tab-item" tab-head tab-name="{{tab.name}}" ng-repeat="tab in tabs"><i class="{{tab.icon}}"></i>{{tab.showName}}</a>
+        </div>
+        <div class="simple-tab-contents" id="mine-tab-contents">
+            <div tab-pane tab-name="{{tab.name}}" register-scroller='true' ng-repeat="tab in tabs">
+                <content on-refresh="onRefresh()">
+                    <scroll-refresher>
+                        <span class="default-tip refresher-tip" >下拉刷新</span>
+                        <span class="to-refresh-tip refresher-tip" >松开刷新</span>
+                        <span class="refreshing-tip refresher-tip">Loading...</span>
+                    </scroll-refresher>
+                    <div class="empty" ng-if="mine[tabName].length == 0" ng-bind-html="还没有任何更新"></div>
+                    <update-list data="mine[tabName]" show-type="false" show-site="true"></update-list>
+                    <div class="item"
+                         ng-if="mine.pageInfo[tabName].pageNo != mine.pageInfo[tabName].totalPage && mine[tabName].length" ng-click="more()">
+                        <p style="text-align: center;padding: 0;">加载更多</p>
+                    </div>
+                </content>
+            </div>
+        </div>
+    </div>
+</nav-page>

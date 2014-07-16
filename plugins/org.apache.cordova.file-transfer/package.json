@@ -1,0 +1,13 @@
+{
+    "version": "0.4.0",
+    "name": "org.apache.cordova.file-transfer",
+    "cordova_name": "File Transfer",
+    "description": "Cordova File Transfer Plugin",
+    "license": "Apache 2.0",
+    "keywords": [
+        "cordova",
+        "file",
+        "transfer"
+    ],
+    "engines": []
+}

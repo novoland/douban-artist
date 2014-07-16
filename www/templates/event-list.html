@@ -1,0 +1,13 @@
+<ul class="event-list">
+    <li class="item item-avatar" ng-repeat="event in eventList"
+        ext-link="event.url">
+        <i class="fa fa-external-link ext-link"></i>
+        <div class="time">
+            <p class="day">{{event.day}}</p>
+            <p class="month">{{event.month}}月</p>
+        </div>
+        <img class="icon" src="{{event.icon}}"/>
+        <h2 class="title" ng-bind-html="event.title"></h2>
+        <p class="abstract" ng-bind-html="replaceNewLine(event.abstract)"></p>
+    </li>
+</ul>

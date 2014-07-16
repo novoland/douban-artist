@@ -1,0 +1,14 @@
+<div class="modal">
+    <header class="bar bar-header bar-positive">
+        <span class="button button-icon fa  fa-chevron-left" pop-modal></span>
+        <h1 class="title">评论音乐人</h1>
+    </header>
+    <content has-header="true">
+        <form name="commentForm">
+            <textarea name="comment" ng-model="comment"></textarea>
+            <div class="padding">
+                <button ng-click="postComment()" ng-disabled="commentForm.$invalid" type="submit" class="button button-block button-positive">确定</button>
+            </div>
+        </form>
+    </content>
+</div>                                                                                                 u

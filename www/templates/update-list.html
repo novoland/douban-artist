@@ -1,0 +1,45 @@
+<ul class="update-list">
+    <li class="item" ng-repeat="update in updateList | filter:nonEmptyKind">
+        <!-- note/event/topic: external link -->
+        <div ng-if="update.kind == 'note' || update.kind == 'event' || update.kind == 'topic'" ext-link="update.url">
+            <img class="update-icon" src="{{update.icon}}"/>
+            <h2 class="title" style="padding-right:70px;">
+                <span class="title-inner ellipsis" ng-bind-html="getTitleHtml(update)"></span>
+                <i class="ext fa fa-external-link-square"></i>
+            </h2>
+            <p ng-if="update.abstract" class="abstract"
+               ng-bind-html="replaceNewLine(update.abstract)">
+            </p>
+            <p class="time">
+                <span class="artist-name" ng-if="showSite" ng-bind-html="update.artist"></span>
+                {{update.time}}
+            </p>
+        </div>
+
+        <!-- song: modal -->
+        <div ng-if="update.kind == 'song'" play-song="update" push-url="/playlist/{{update.widget_id}}?playId={{update.song_id}}">
+            <i class="icon ion-ios7-play play"></i>
+            <h2 class="title" ng-bind-html="getTitleHtml(update)"></h2>
+            <p ng-if="update.abstract" class="abstract"
+               ng-bind-html="replaceNewLine(update.abstract)">
+            </p>
+            <p class="time">
+                <span class="artist-name" ng-if="showSite" ng-bind-html="update.artist"></span>
+                {{update.time}}
+            </p>
+        </div>
+
+        <!-- photo: modal -->
+        <div ng-if="update.kind == 'photo'">
+            <img class="update-icon" src="{{update.icon}}"/>
+            <h2 class="title" ng-bind-html="getTitleHtml(update)"></h2>
+            <p ng-if="update.abstract" class="abstract"
+               ng-bind-html="replaceNewLine(update.abstract)">
+            </p>
+            <p class="time">
+                <span class="artist-name" ng-if="showSite" ng-bind-html="update.artist"></span>
+                {{update.time}}
+            </p>
+        </div>
+    </li>
+</ul>

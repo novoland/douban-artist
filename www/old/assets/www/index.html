@@ -1,0 +1,912 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="format-detection" content="telephone=no">
+
+<title>豆瓣音乐人</title>
+<!-- <script src="static/phonegap.js"></script> -->
+<!-- <script src="static/statusbarnotification.js"></script> -->
+<!-- <script src="static/childbrowser.js"></script> -->
+<!-- <script src="static/softkeyboard.js"></script> -->
+<script src="static/jquery-2.0.1.min.js"></script>
+<script src="static/jquery.ba-hashchange.js"></script>
+<script src="static/iscroll.js"></script>
+<!-- <script src="static/PushNotification.js"></script> -->
+<!-- <script src="static/SocialSharing.js"></script> -->
+<!-- <script src="static/Feedback.js"></script> -->
+<script src="static/utils.js"></script>
+<script src="static/handlers.js"></script>
+<script src="static/player_phonegap.js"></script>
+
+<link href="static/iphone.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="static/retina.css"
+        media="screen and (-webkit-device-pixel-ratio: 2)" />
+<link rel="stylesheet" type="text/css" href="static/icon480.css"
+        media="screen and (-webkit-device-pixel-ratio: 1.5)" />
+<link rel="stylesheet" type="text/css" href="static/icon240.css"
+        media="screen and (-webkit-device-pixel-ratio: 0.75)" />
+
+<script>
+if (isAndroid) {
+    document.write('<link rel="stylesheet" type="text/css" href="static/android.css"/>');
+    document.addEventListener('deviceready', onDeviceReady, false);
+}
+// webos
+//    document.addEventListener('deviceready', onDeviceReady, false);
+</script>
+
+<script id="tmpl_search" type="text/template">
+    <div class="frame">
+        <div id="header">
+            {% if (q) { %}
+                <a class="back_link" href="#search"></a>
+            {% } %}
+            分类浏览
+        </div>
+        {% if (artists.length) { %}
+            <div id="wrapper_search">
+                <div id="scroller_search">
+                    {%=$.tmpl('#tmpl_search_form', this) %}
+                    <ul id="artist_list">
+                        {%=$.tmpl("#tmpl_artist_list", this)%}
+                    </ul>
+                </div>
+            </div>
+        {% } else if (!q) { %}
+            <div id="wrapper_genrelist">
+                <div id="scroller_genrelist">
+                    {%=$.tmpl('#tmpl_search_form', this) %}
+                    <div class="list_cate">流派</div>
+                    <ul id="genrelist">
+                        {% for (var i=0; i<genrelist.length; i++) { %}
+                            <li class="link all" rel="#genre/{%=genrelist[i][0]%}">
+                                {%=genrelist[i][1]%}
+                                <div class="forward"></div>
+                            </li>
+                        {% } %}
+                        <li class="list_cate">类别</li>
+                        <li class="link all" rel="#genre/*/dj">
+                            DJ <div class="forward"></div>
+                        </li>
+                        <li class="link all" rel="#genre/*/label">
+                            厂牌 <div class="forward"></div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        {% } else { %}
+            <div id="wrapper_genrelist">
+                <div id="scroller_genrelist">
+                    {%=$.tmpl('#tmpl_search_form', this) %}
+                    <div class="centralized_text empty_result_text">没有搜索到结果</div>
+                </div>
+            </div>
+        {% } %}
+    </div>
+</script>
+
+<script id="tmpl_search_tags" type="text/template">
+    <div class="search_tags">
+        <ul id="tag_list">
+        {% for (var i=0; i<tags.length; i++) { %}
+            <li rel="#tag/{%=tags[i].url%}"
+                class="link tag{%=tags[i].size%}">{%=tags[i].name%}
+            </li>
+        {% } %}
+        </ul>
+    </div>
+</script>
+
+<script id="tmpl_song_chart" type="text/template">
+    <div class="frame">
+        <div id="header">
+            豆瓣音乐人
+        </div>
+        <div class="sub_nav_wrap">
+            <ul class="sub_nav">
+                <li class="link now" rel="#chart/song">热门单曲</li>
+                <li class="link" rel="#chart/artist">热门音乐人</li>
+            </ul>
+        </div>
+        <div id="song_wrapper">
+            <div id="scroller">
+                <ul id="artist_list">
+                    {% for (var i=0; i<songs.length; i++) { %}
+                    <li id="song{%=songs[i].id%}"
+                        class="all link chart_song song_li"
+                        rel="#artist/{%=songs[i].artist_id%}">
+                        <div class="rank">
+                            {%=songs[i].rank<10?'0'+songs[i].rank:songs[i].rank%}
+                        </div>
+                        <img class="icon" src="{%=songs[i].picture%}"/>
+                        <div class="song_name">{%=songs[i].name%}</div>
+                        <div class="artist">{%=songs[i].artist%}</div>
+                        <div class="add link click_to_play"
+                            rel="#chart/song/{%=songs[i].id%}">
+                        </div>
+                    </li>
+                    {% } %}
+                </ul>
+            </div>
+        </div>
+    </div>
+</script>
+
+<script id="tmpl_chart" type="text/template">
+    <div class="frame">
+        <div id="header">
+            豆瓣音乐人
+        </div>
+        <div class="sub_nav_wrap">
+            <ul class="sub_nav">
+                <li class="link" rel="#chart/song">热门单曲</li>
+                <li class="link now" rel="#chart/artist">热门音乐人</li>
+            </ul>
+        </div>
+        <div id="chart_wrapper">
+            <div id="scroller">
+                <ul id="artist_list">
+                    {%=$.tmpl('#tmpl_artist_list', this) %}
+                </ul>
+            </div>
+        </div>
+    </div>
+</script>
+
+<script id="tmpl_artist_list" type="text/template">
+    {% for (var i=0; i<artists.length; i++) {
+            var a=artists[i]; %}
+        <li class="link all" rel="#artist/{%=a.id%}">
+        <img class="icon" src="{%=a.picture%}"/>
+        <div class="name">
+            {%=a.name%}
+            {% if (a.type == 'dj' || a.type == 'label') { %}
+                <span class="special">
+                    {%=a.type=='dj'?'DJ':'厂牌'%}
+                </span>
+            {% } %}
+        </div>
+        <div class="style">{%=a.style%}</div>
+        <div class="follower">{%=a.follower%}人关注</div>
+        <div class="like_btn">
+            <div id="add{%=a.id%}" class="add{%=a.added=="yes"?"ed":""%}"></div>
+        </div>
+    </li>
+    {% } %}
+</script>
+
+<script id="tmpl_tag" type="text/template">
+    <div class="frame">
+        <div id="header">
+            <a class="back_link" href="#search"></a>
+            “{%=tag_name%}”
+            <ul class="dual_tab">
+                <li class="sort_new link"
+        rel="#tag/{%=encodeURIComponent(tag_name)%}/{%=type||'artist'%}/new">最新</li>
+                <li class="sort_hot now link"
+        rel="#tag/{%=encodeURIComponent(tag_name)%}/{%=type||'artist'%}/hot">最热</li>
+            </ul>
+        </div>
+        <div id="wrapper_tag">
+            <div id="scroller_tag">
+                {%=$.tmpl('#tmpl_search_form', this) %}
+                <ul id="artist_list">
+                    {%=$.tmpl('#tmpl_artist_list', this)%}
+                    <li id="more_artists">
+                    加载更多 . . .
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</script>
+
+<script id="tmpl_genre" type="text/template">
+    <div class="frame">
+        <div id="header">
+            <a class="back_link" href="#search"></a>
+            <div class="title">
+                {%=genre_name%}
+            </div>
+            <ul class="dual_tab">
+                <li class="sort_new link"
+                    rel="#genre/{%=gid%}/{%=type%}/new">最新</li>
+                <li class="sort_hot now link"
+                    rel="#genre/{%=gid%}/{%=type%}/hot">最热</li>
+            </ul>
+        </div>
+        <div id="wrapper_genre">
+            <div id="scroller">
+                {%=$.tmpl('#tmpl_search_form', this) %}
+                <ul id="artist_list">
+                    {%=$.tmpl('#tmpl_artist_list', this)%}
+                    <li id="more_artists">
+                    加载更多 . . .
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</script>
+
+<script id="tmpl_search_form" type="text/template">
+    <div class="search_input">
+        <form class="search_form">
+            <input title="音乐人、DJ、流派、风格..."
+                    type="text" class="text" value="{%=this['q']||''%}"/>
+            <input type="submit" class="search_btn" value=""/>
+            <div class="cancel_btn">取消</div>
+        </form>
+    </div>
+</script>
+
+<script id="tmpl_photos_thumb" type="text/template">
+    <div class="frame">
+        <div id="header">
+            <a class="back_link" href="#artist_album/{%=artist_id%}"></a>
+            <div class="title">
+                {%=artist_name%} 的 {%=album_name%}
+            </div>
+        </div>
+        <div id="wrapper_photos_thumb">
+            <div id="scroller_photos_thumb">
+                {% if (!photos.length) { %}
+                    <div class="empty">这个相册里还没有任何图片呢</div>
+                {% } %}
+                <ul id="photo_list_thumb">
+                    {%=$.tmpl('#tmpl_photo_thumb_list', this)%}
+                </ul>
+            </div>
+        </div>
+    </div>
+</script>
+
+<script id="tmpl_photo_thumb_list" type="text/template">
+    {% for (var i=0;i<photos.length;i++) { %}
+        <li class="link" rel="#photos/{%=album_id%}/{%=photos[i].photo_id%}">
+            <img src="{%=photos[i].url%}"/>
+        </li>
+    {% } %}
+</script>
+
+<script id="tmpl_photos" type="text/template">
+    <div class="frame">
+        <style>
+            #photo_list li, #photo_list .inphoto {
+                width:{%=$(window).width()%}px
+            }
+            #photo_list .inphoto {
+                height:{%=$(window).height()-45-69-50%}px
+            }
+        </style>
+        <div id="header">
+            <a class="back_link" href="javascript:location.hash=Router.history(-1)"></a>
+            <div class="title">
+                {%=artist_name%} 的 {%=album_name%}
+            </div>
+        </div>
+        <div id="wrapper_photos">
+            <div id="scroller_photos">
+                <ul id="photo_list">
+                    {%=$.tmpl('#tmpl_photo_list', this)%}
+                </ul>
+            </div>
+        </div>
+        <div class="photo_desc">
+            <div class="desc"></div>
+            <div class="author"></div>
+        </div>
+    </div>
+</script>
+
+<script id="tmpl_photo_list" type="text/template">
+    {% for (var i=0;i<photos.length;i++) { %}
+        <li class="all"
+            data-desc="{%=photos[i].desc%}"
+            data-uploader="{%=photos[i].uploader_name%}"
+            data-time="{%=photos[i].upload_time%}"
+            data-order="{%=photos[i].order%}">
+            <div class="inphoto">
+                <img src="{%=photos[i].url%}"/>
+            </div>
+        </li>
+    {% } %}
+</script>
+
+<script id="tmpl_artist_playlist" type="text/template">
+    <div class="small_frame">
+        {% if (!playlist.length) { %}
+            <div class="empty">{%=name%}还没有添加任何播放列表</div>
+        {% } %}
+        <ul id="play_list">
+            {% for (var i=0; i<playlist.length; i++) { %}
+            <li class="link all" rel="#songs/{%=playlist[i].id%}">
+                <div class="forward"></div>
+                {%=playlist[i].title%}
+            </li>
+            {% } %}
+        </ul>
+    </div>
+</script>
+
+<script id="tmpl_artist_update" type="text/template">
+    <div class="small_frame">
+        {% if (!updates.length) { %}
+            <div class="empty">最近{%=name%}还没有什么新鲜事儿发生</div>
+        {% } %}
+        <ul id="update_list">
+            {% this.show_type = true; %}
+            {%=$.tmpl('#tmpl_update_list', this)%}
+        </ul>
+    </div>
+</script>
+
+<script id="tmpl_artist_album" type="text/template">
+    <div class="small_frame">
+        {% if (!albums.length) { %}
+            <div class="empty">{%=name%}还没有创建任何相册</div>
+        {% } %}
+        <ul id="album_list">
+            {% for (var i=0; i<albums.length; i++) { %}
+            <li class="link all" rel="#photos_thumb/{%=albums[i].id%}">
+                {% if (albums[i].cover != '') { %}
+                    <img class="cover" src="{%=albums[i].cover%}"/>
+                {% } %}
+                <div class="title">
+                    {%=albums[i].title%}
+                </div>
+                <div class="forward"></div>
+            </li>
+            {% } %}
+        </ul>
+    </div>
+</script>
+
+<script id="tmpl_artist_board" type="text/template">
+    <div class="small_frame board_frame">
+        <form id="msg_form">
+            <textarea title="我来说几句" id="msg_area"></textarea>
+            <div class="board_submit">发送</div>
+        </form>
+        <ul id="message_list">
+            {% for (var i=0; i<messages.length; i++) { %}
+            <li class="all">
+                <img src="{%=messages[i].icon%}" />
+                <span class="author">{%=messages[i].author%}:</span>
+                {%=messages[i].content%}
+            </li>
+            {% } %}
+        </ul>
+    </div>
+</script>
+
+<script id="tmpl_artist_event" type="text/template">
+    <div class="small_frame">
+        {% if (!events.length) { %}
+            <div class="empty">{%=name%}还没有添加任何活动</div>
+        {% } %}
+        <ul id="event_list">
+            {% for (var i=0; i<events.length; i++) { %}
+                <li class="link all no_hl" rel="{%=encodeURIComponent(events[i].url)%}">
+                    <div class="forward"></div>
+                    <div class="time">
+                        <span class="day">{%=events[i].day%}</span>
+                        <span class="month">{%=events[i].month%}月</span>
+                    </div>
+                    <img class="icon" src="{%=events[i].icon%}"/>
+                    <div class="title">{%=events[i].title%}</div>
+                    <div class="abstract">{%=events[i].abstract.replace(/^[^\ ]*\ /, '')%}</div>
+                </li>
+            {% } %}
+        </ul>
+    </div>
+</script>
+
+<script id="tmpl_artist_main" type="text/template">
+    <div class="frame">
+        <div id="header">
+            <a class="back_link"
+                href="javascript:Router.get_back_from('#artist|#songs|#photos')"></a>
+            <div class="title">
+                {%=name%}
+            </div>
+        </div>
+        <div id="{%=wrapper%}" class="artist_wrapper">
+            <div id="scroller_main">
+                <div id="general">
+                    <img class="icon" src="{%=picture%}"/>
+                    <div class="like_btn">
+                        <div id="add{%=id%}" class="add{%=added=='yes'?'ed':''%}">
+                            <span class="action_text">喜欢</span>
+                        </div>
+                    </div>
+                    <div class="share_artist">
+                        <div id="share{%=id%}" class="share" data-id="{%=id%}" data-title="{%=name%}"
+                            data-link="#artist/{%=id%}" data-cover="{%=picture%}">
+                            <span class="action_text" data-id="{%=id%}" data-title="{%=name%}"
+                                  data-link="#artist/{%=id%}" data-cover="{%=picture%}">分享</span>
+                        </div>
+                    </div>
+                    <div class="name">{%=name%}</div>
+                    <div class="style">{%=style%}</div>
+                    <div class="style">{%=member%}</div>
+                    <div class="follower">{%=follower%}人关注</div>
+                </div>
+
+                <div class="sub_nav_wrap_artist">
+                    <ul class="sub_nav_artist">
+                        <li id="artist_playlist" rel="#artist_playlist/{%=id%}" class="link now">曲库</li>
+                        <li id="artist_event" rel="#artist_event/{%=id%}" class="link">活动</li>
+                        <li id="artist_album" rel="#artist_album/{%=id%}" class="link">相册</li>
+                        <li id="artist_update" rel="#artist_update/{%=id%}" class="link">动态</li>
+                        <li id="artist_board" rel="#artist_board/{%=id%}" class="link">留言</li>
+                    </ul>
+                </div>
+
+                {%=small_html%}
+            </div>
+        </div>
+    </div>
+</script>
+
+<script id="tmpl_songs" type="text/template">
+    <div class="frame">
+        <div id="header">
+            <a class="back_link" href="javascript:Router.get_back_from('#songs')"></a>
+            <div class="title">
+                {%=artist_name%} - {%=playlist.name%}
+            </div>
+        </div>
+        <div id="wrapper_songs">
+            <div id="scroller_songs">
+                {% if (!songs.length) { %}
+                    <div class="empty">这个播放列表里还没有任何歌曲</div>
+                {% } %}
+                <ul id="song_list" class="click_to_play">
+                    {% for (var i=0; i<songs.length; i++) { %}
+                        <li class="song_li all link no_hl"
+                                id="song{%=songs[i].id%}"
+                                rel="#songs/{%=playlist.id%}/{%=songs[i].id%}">
+                            <div class="song_title">{%=songs[i].name%}</div>
+                            <div class="audio_length">{%=songs[i].length%}</div>
+                            <div class="add"></div>
+                        </li>
+                    {% } %}
+                </ul>
+            </div>
+        </div>
+    </div>
+</script>
+
+<script id="tmpl_mine" type="text/template">
+    <div class="frame mine_frame">
+        {% if (user) { %}
+            <div id="header">
+                {% if (isIDevice) { %}
+                <a href="#settings" class="left_top_link user_avatar">
+                    <img src="{%=user_avatar%}" 
+                         alt="{%=window.localStorage.getItem('user_name')%}"
+                         width="36" height="36" />
+                </a>
+                {% } %}
+                我喜欢的音乐人
+                <a class="forward_link" href="#my_artists">列表</a>
+            </div>
+            <div class="sub_nav_wrap">
+                <ul class="sub_nav_mine">
+                    <li class="link song_tab" rel="#mine/song">曲库</li>
+                    <li class="link event_tab" rel="#mine/event">活动</li>
+                    <li class="link photo_tab" rel="#mine/photo">相册</li>
+                </ul>
+            </div>
+            <div id="wrapper">
+                <div id="scroller">
+                    {% if (!updates.length) { %}
+                        <div class="empty">还没有任何更新</div>
+                    {% } %}
+                    <ul id="update_list">
+                        {% if (updates.length) { %}
+                            <li id="pull_down">下拉刷新</li>
+                        {% } %}
+                        {% this.show_site = true; this.show_type = false; %}
+                        {%=$.tmpl('#tmpl_update_list', this)%}
+                        {% if (updates.length) { %}
+                            <li id="more_artists">
+                            加载更多 . . .
+                            </li>
+                        {% } %}
+                    </ul>
+                </div>
+            </div>
+        {% } else { %}
+            <div id="header">
+                {% if (isIDevice) { %}
+                <a href="#settings" class="left_top_link nav_button">
+                    设置
+                </a>
+                {% } %}
+                我喜欢的音乐人
+            </div>
+            <div id="wrapper" class="login_promote_wrapper">
+                <div class="centralized_text text_medium text_gray">
+                    查看喜欢的音乐人及最新动态请
+                </div>
+                <a href="#login" class="btn_primary">登录</a>
+                <div id="reg" class="reg_btn centralized_text bottom_text">
+                    <a href="#register">还没有帐号？立即注册</a>
+                </div>
+            </div>
+        {% } %}
+    </div>
+</script>
+
+<script id="tmpl_my_artists" type="text/template">
+    <div class="frame">
+        <div id="header">
+            {% if (isIDevice) { %}
+            <a href="#settings" class="left_top_link user_avatar">
+                <img src="{%=window.localStorage.getItem('user_avatar')%}"
+                alt="{%=window.localStorage.getItem('user_name')%}"
+                width="36" height="36" />
+            </a>
+            {% } %}
+            我喜欢的音乐人
+            <a class="forward_link" href="#mine">动态</a>
+        </div>
+        {% if (user) { %}
+            <div id="wrapper_my_art">
+                <div id="scroller_my_art">
+                    {% if (!artists.length) { %}
+                        <div class="empty">我还没有关注的音乐人</div>
+                    {% } %}
+                    <ul id="artist_list">
+                        {%=$.tmpl('#tmpl_artist_list', this)%}
+                        {% if (user) { %}
+                            {% if (artists.length) { %}
+                                <li id="more_artists">
+                                加载更多 . . .
+                                </li>
+                            {% } %}
+                        {% } %}
+                    </ul>
+                </div>
+            </div>
+        {% } %}
+    </div>
+</script>
+
+<script id="tmpl_update_list" type="text/template">
+    {% var action, title, icon, url; for (var i=0; i<updates.length; i++) { %}
+        {% var up = updates[i];
+        if (up.kind == 'topic') {
+            action = "讨论";
+            url = up.url;
+            icon = picture;
+        } else if (up.kind == 'note') {
+            action = "日记";
+            url = up.url;
+            icon = picture;
+        } else if (up.kind == 'photo') {
+            action = "照片";
+            url = "#photos/" + up.album_id + "/" + up.photo_id;
+            icon = up.icon;
+        } else if (up.kind == 'event') {
+            action = "活动";
+            url = up.url;
+            icon = up.icon;
+        } else if (up.kind == 'song') {
+            action = "单曲";
+            url = "#songs/" + up.widget_id + "/" + up.song_id;
+        } else continue; %}
+
+        <li rel="{%=url%}" class="all link {%=up.kind=='song'?'click_to_play':''%}">
+            {% if (up.kind == 'song') { %}
+                <div class="icon_play"></div>
+            {% } else { %}
+                <img class="icon" src="{%=icon%}"/>
+            {% } %}
+            <div class="title">
+                {%=this['show_type'] ? ('['+action+']') : ''%}
+                {%=up.title%}
+                {% if (['note', 'event', 'topic'].indexOf(up.kind) != -1) { %}
+                    <span class="ext"></span>
+                {% } %}
+            </div>
+            {% if (up['abstract']) { %}
+                <div class="abstract">{%=up.abstract.replace(/\n/g,'<br/>')%}</div>
+            {% } %}
+            <div class="time">
+                {% if (this['show_site']) { %}
+                    <span class="artist_name">{%=up.artist%}</span>
+                {% } %}
+                {%=up.time%}
+            </div>
+        </li>
+    {% } %}
+</script>
+
+<script id="tmpl_login" type="text/template">
+    <div class="frame login_frame">
+        <div id="header">
+             <a class="close_link" href="javascript:close_login()">
+             </a>
+             登录
+             <a class="confirm_link" href="javascript:confirm_login()">
+             </a>
+        </div>
+        <div class="form_wrap" id="wrapper_login">
+            <form id="form_main">
+                <div id="err_info"></div>
+                <div class="input_group">
+                    <label class="input_label">邮箱</label>
+                    <input id="username" class="text" type="email" autocapitalize="off"/>
+                </div>
+                <div class="input_group">
+                    <label class="input_label">密码</label>
+                    <input id="password" class="text" type="password"/>
+                </div>
+
+                <div id="submit">登  录</div>
+                <div id="reg" class="reg_btn">
+                    <a href="#register">还没有帐号？立即注册</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</script>
+
+<script id="tmpl_settings" type="text/template">
+    <div class="frame settings_frame">
+        <a class="back_link downward_arrow" href="#mine">
+        </a>
+        <div id="header">
+            设置
+        </div>
+        <div id="wrapper_settings">
+            <div id="scroller_settings">
+                <ul class="st_items">
+                    <li class="st st_title">
+                        <span class="txt_wrapper">帐号</span>
+                    </li>
+                    {% if (user) { %}
+                    <li class="st st_item">
+                        <a href="#settings" onclick="show_logout()">
+                            <span class="txt_wrapper st_item_text">{%=window.localStorage.getItem('user_name')%}</span>
+                            <span class="txt_wrapper st_action_text logout">退出登录</span>
+                        </a>
+                    </li>
+                    {% } else { %}
+                        <a href="#login" class="btn_primary settings_login">登录</a>
+                    {% } %}
+                </ul>
+                {% if (isIDevice) { %}
+                <ul class="st_items">
+                    <li class="st st_title">
+                        <span class="txt_wrapper">分享设置</span>
+                    </li>
+                    <li class="st st_item share_vender">
+                        {% if ($.inArray(SHARE_VENDER_SINA, boundVenders) !== -1) { %}
+                        <a href="javascript:;" class="deauth" data-vname="新浪微博"
+                            data-vender="{%=SHARE_VENDER_SINA%}">
+                            <span class="txt_wrapper st_item_text">新浪微博</span>
+                            <span class="txt_wrapper st_forward_icon"></span>
+                            <span class="txt_wrapper st_action_text">@{%=venders[SHARE_VENDER_SINA]%}</span>
+                        </a>
+                        {% } else { %}
+                        <a href="javascript:;" class="auth" data-vname="新浪微博"
+                            data-vender="{%=SHARE_VENDER_SINA%}">
+                            <span class="txt_wrapper st_item_text">新浪微博</span>
+                            <span class="txt_wrapper st_forward_icon"></span>
+                            <span class="txt_wrapper st_action_text">未绑定</span>
+                        </a>
+                        {% } %}
+
+                    </li>
+                    <li class="st st_item non-top-border share_vender">
+                        {% if ($.inArray(SHARE_VENDER_TENCENT, boundVenders) !== -1) { %}
+                        <a href="javascript:;" class="deauth" data-vname="腾讯微博"
+                            data-vender="{%=SHARE_VENDER_TENCENT%}">
+                            <span class="txt_wrapper st_item_text">腾讯微博</span>
+                            <span class="txt_wrapper st_forward_icon"></span>
+                            <span class="txt_wrapper st_action_text">@{%=venders[SHARE_VENDER_TENCENT]%}</span>
+                        </a>
+                        {% } else { %}
+                        <a href="javascript:;" class="auth" data-vname="腾讯微博"
+                            data-vender="{%=SHARE_VENDER_TENCENT%}">
+                            <span class="txt_wrapper st_item_text">腾讯微博</span>
+                            <span class="txt_wrapper st_forward_icon"></span>
+                            <span class="txt_wrapper st_action_text">未绑定</span>
+                        </a>
+                        {% } %}
+                    </li>
+                </ul>
+                {% } %}
+                {% if (isIDevice && user) { %}
+                <ul class="st_items">
+                    <li class="st st_title">
+                        <span class="txt_wrapper">提醒设置</span>
+                    </li>
+                    <li class="st st_item">
+                        <a href="#settings" class="push_setting {%=pushUploadSongSetting%}" id="push_upload_songs">
+                            <span class="txt_wrapper st_item_text">喜欢的音乐人上传新作品时</span>
+                            <span class="txt_wrapper st_tick_icon"></span>
+                            <span class="txt_wrapper st_action_text"></span>
+                        </a>
+                    </li>
+                    <li class="st st_item non-top-border">
+                        <a href="#settings" class="push_setting {%=pushPubEventsSetting%}" id="push_pub_events">
+                            <span class="txt_wrapper st_item_text">喜欢的音乐人发布新活动时</span>
+                            <span class="txt_wrapper st_tick_icon"></span>
+                            <span class="txt_wrapper st_action_text"></span>
+                        </a>
+                    </li>
+                </ul>
+                {% } %}
+                <ul class="st_items">
+                    <li class="st st_title">
+                        <span class="txt_wrapper">其它</span>
+                    </li>
+                    <li class="st st_item">
+                        <a href="#about">
+                            <span class="txt_wrapper st_item_text">关于豆瓣音乐人</span>
+                            <span class="txt_wrapper st_forward_icon"></span>
+                        </a>
+                    </li>
+                    <li class="st st_item non-top-border">
+                        <a href="#apps">
+                            <span class="txt_wrapper st_item_text">豆瓣应用推荐</span>
+                            <span class="txt_wrapper st_forward_icon"></span>
+                        </a>
+                    </li>
+                </ul>
+                <div class="bottom_space"></div>
+            </div>
+        </div>
+    </div>
+</script>
+
+<script id="tmpl_about" type="text/template">
+    <div class="frame about_frame">
+        <div id="header">
+            <a class="back_link" href="#settings">
+            </a>
+            关于豆瓣音乐人
+        </div>
+        <div id="wrapper_about">
+        <div class="app_icon"></div>
+        <div class="app_icon_text"></div>
+        {% if (isIDevice) { %}
+        <a id="add_review" class="btn_primary" href="itms-apps://itunes.apple.com/cn/artist/douban-inc./id353732575?uo=4">
+            给豆瓣音乐人评价
+        </a>
+        {% } %}
+        <a id="add_feedback" class="btn_primary" href="javascript:;">
+            问题反馈
+        </a>
+        </div>
+    </div>
+</script>
+
+<script id="tmpl_apps" type="text/template">
+    <div class="frame apps_frame">
+        <div id="header">
+            <a class="back_link" href="#settings">
+            </a>
+            豆瓣应用
+        </div>
+        <div id="wrapper_apps">
+        <ul class="app_list">
+            {% for (var i=0; i<apps.length; i++) { %}
+                {% if (apps[i].device !== 'ipad') { %}
+                <li class="app_item">
+                    <a class="app_title" href="{%=apps[i].download_link%}"><s class="icon-{%=apps[i].name%}"></s>{%=apps[i].title%}
+                </li>
+                {% } %}
+            {% } %}
+                <li class="app_item">
+                    <a class="app_title" href="itms-apps://ax.search.itunes.apple.com/WebObjects/MZSearch.woa/wa/search?media=software&term=豆瓣">
+                        <s class="search_app"></s>查找更多
+                    </a>
+                </li>
+        </ul>
+        </div>
+    </div>
+</script>
+
+<script id="tmpl_register" type="text/template">
+    <div class="frame reg_frame">
+        <div id="header">
+            <a class="back_link" href="javascript:location.hash = Router.history(-1);">
+            </a>
+            注册
+        </div>
+        <div class="form_wrap" id="reg_form">
+            <form id="form_main" style="padding-top:10px">
+                <div id="err_info"></div>
+                <div class="input_group">
+                    <label class="input_label">邮箱</label>
+                    <input id="email" class="text" type="email" autocapitalize="off"/>
+                </div>
+                <div class="input_group">
+                    <label class="input_label">名号</label>
+                    <input id="nick" class="text" type="text" autocapitalize="off"/>
+                </div>
+                <div class="input_group">
+                    <label class="input_label">密码</label>
+                    <input id="password" class="text" type="password"/>
+                </div>
+                <div class="input_group">
+                    <label class="input_label">验证码</label>
+                    <input id="cap_solution" class="text" type="text" autocapitalize="off"/>
+                    <input id="cap_id" type="hidden" value="{%=cap_id%}"/>
+                    <img id="cap_img" src="{%=cap_img%}"/>
+                </div>
+                <div class="agreement">
+                    <input id="agree" type="checkbox"/>我已经认真阅读并同意豆瓣的
+                    《<a target="_blank"
+                    href="http://www.douban.com/about?policy=agreement">使用协议</a>》
+                </div>
+
+                <div id="submit" class="btn_primary">完成注册</div>
+            </form>
+        </div>
+    </div>
+</script>
+
+<script id="tmpl_sub_nav" type="text/template">
+    <ul id="footer_sub_nav">
+        {% for (var i=0; i<links.length; i++) { %}
+            <li class="link no_hl" rel="{%=links[i][1]%}" data-nav="{%=nav%}">
+                {%=links[i][0]%}
+            </li>
+        {% } %}
+    </ul>
+</script>
+
+<script id="tmpl_bottom_menu" type="text/template">
+    <ul id="bottom_menu">
+        <li onclick="exit_app()">退出应用</li>
+    </ul>
+</script>
+
+</head>
+<body onload="onBodyLoad()">
+    <div class="loading">
+        <img src="static/loading.gif"/>
+    </div>
+    <div id="content">
+        <div class="frame"></div>
+    </div>
+
+    <div id="footer">
+        <div class="footer_nav_back">
+            <ul id="footer_nav">
+                <li id="nav_chart" class="nav nav_chart">热门排行</li>
+                <li id="nav_search" class="nav nav_search">分类浏览</li>
+                <li id="nav_mine" class="nav nav_mine">我喜欢的</li>
+                <li id="nav_split" class="nav nav_split"></li>
+                <li id="nav_play" class="nav_play">正在播放</li>
+            </ul>
+        </div>
+        <div id="player">
+            <div id="song_icon"></div>
+            <div id="song_title"></div>
+            <div id="song_time">00:00</div>
+            <div id="song_total">
+                <div id="song_progress"></div>
+            </div>
+            <div id="pause_btn" class="play_btn"></div>
+            <div id="next_btn"></div>
+            <div id="share_btn" class="share_btn"></div>
+            <div id="no_song_tip">当前没有正在播放的歌曲</div>
+        </div>
+    </div>
+    <audio id="audio"></audio>
+
+</body>
+</html>
