@@ -2,6 +2,8 @@
 
 豆瓣音乐人 hybrid app，满足自己好奇心开发的，实现了原版的大部分功能，完成度80%。
 
+UI 布局自己设计的，配色参考了[vertial infinity](http://www.cssauthor.com/vertical-infinity-a-mega-flat-style-ui-kit-for-free-download/)。
+
 在 Android 4.2.1 上测试通过，但体验离原生 app 还是有很大差距，而且由于安卓平台的分裂，在不同机器上测试时发现了各种各样奇葩的问题。
 
 所以很大可能弃坑，*IOS版开发酝酿中* 。
