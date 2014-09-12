@@ -1,6 +1,6 @@
 # 简介
 
-豆瓣音乐人 hybrid app，满足自己好奇心开发的，实现了原版的大部分功能，完成度80%。
+豆瓣音乐人 hybrid app，满足自己好奇心开发的（不是专业前端。。），实现了原版的大部分功能，完成度80%。
 
 UI 布局自己设计的，配色参考了[vertial infinity](http://www.cssauthor.com/vertical-infinity-a-mega-flat-style-ui-kit-for-free-download/)。
 
